@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {createMoviesThunk, deleteMovieThunk, findAllMoviesThunk} from "./movies-thunks";
 import {userLikesMovieThunk} from "../likes/likes-thunks";
+import { getAccessToken } from "../spotify/spotify-access-token";
 
 const Movies = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -9,6 +10,7 @@ const Movies = () => {
     const [movie, setMovie] = useState({title: 'New Movie'})
     const dispatch = useDispatch()
     useEffect(() => {
+        getAccessToken(); // fetch spotify api access token on page load
         dispatch(findAllMoviesThunk())
     }, [])
     return(
