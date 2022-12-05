@@ -35,7 +35,7 @@ const SpotifySearch = ({ searchCategory }) => {
                             }} className="float-end bi bi-star"></i>
                             <img alt='album art' src={song.album.images[1].url} height={100}/>
                             <p>{song.name}</p>
-                            <p>{song.artists.map(aristObject => aristObject.name).join(',')}</p>
+                            <p>{song.artists.map(artistObject => artistObject.name).join(',')}</p>
                         </li>
                     )
                 }
