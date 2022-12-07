@@ -13,8 +13,7 @@ export const findUserById = async (uid) => {
 
 export const register = async (user) => {
     const response = await api.post(`${BASE_API_URL}/register`, user)
-    const newUser = response.data
-    return newUser
+    return response.data
 }
 
 export const login = async (user) => {
@@ -36,9 +35,10 @@ export const findAllUsers = async () => {
     return response.data
 }
 
-export const createUser = () => {
+export const createUser = async () => {
+
 
 }
 
-const deleteUser = () => {}
-const updateUser = () => {}
+const deleteUser = async (uid) => {}
+const updateUser = async (uid, username) => {}

@@ -15,7 +15,7 @@ const Profile = () => {
             <h1>Profile</h1>
             {
                 currentUser &&
-                <h2>Welcome new user: {currentUser.username}</h2>
+                <h2>Welcome, {currentUser.username}!</h2>
             }
             <button
                 className="btn btn-danger"

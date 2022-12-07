@@ -14,7 +14,8 @@ const usersReducer = createSlice({
         users: [],
         loading: false,
         currentUser: null,
-        publicProfile: null
+        publicProfile: null,
+        error: null
     },
     extraReducers: {
         [findUserByIdThunk.fulfilled]: (state, action) => {
@@ -29,8 +30,16 @@ const usersReducer = createSlice({
         [registerThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
         },
+        [registerThunk.rejected]: (state, action) => {
+            state.error = action.payload
+            state.currentUser = null
+        },
         [loginThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
+        },
+        [loginThunk.rejected]: (state, action) => {
+            state.error = action.payload
+            state.currentUser = null
         },
         [findAllUsersThunk.fulfilled]: (state, action) => {
             state.users = action.payload
