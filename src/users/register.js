@@ -9,7 +9,7 @@ const Register = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [validatePassword, setValidatePassword] = useState("")
-    const [role, setRole] = useState(false)
+    const [admin, setAdmin] = useState(false)
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const handleRegisterBtn = () => {
@@ -30,7 +30,7 @@ const Register = () => {
             return
         }
         setError(null)
-        dispatch(registerThunk({username, password}))
+        admin ? dispatch(registerThunk({username, password, role: 'ADMIN'})) : dispatch(registerThunk({username, password, role: 'USER'}))
     }
 
     if(currentUser) {
@@ -64,10 +64,10 @@ const Register = () => {
                 type="password"
                 value={validatePassword}/>
             <input
-                onChange={(e) => setRole(e.target.checked)}
+                onChange={(e) => setAdmin(e.target.checked)}
                 className="form-check-input"
                 type="checkbox"
-                value={role}
+                checked={admin}
                 id="flexCheckDefault"/>
             <label className="form-check-label" htmlFor="flexCheckDefault">
                 Admin role
