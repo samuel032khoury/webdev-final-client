@@ -17,12 +17,12 @@ import Register from "./users/register";
 import CurrentUser from "./users/current-user";
 import Profile from "./users/profile";
 import ProtectedRoute from "./users/protected-route";
-import OmdbDetails from "./omdb/omdb-details";
 import reviewsReducer from "./reviews/reviews-reducer";
 import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
 import SpotifySearch from "./spotify/spotify-search";
+import SongDetail from "./spotify/song-detail";
 
 const store = configureStore({
     reducer: {
@@ -58,7 +58,7 @@ function App() {
                                     <Profile/>
                                 </ProtectedRoute>
                             }/>
-                            <Route path="/details/:imdbID" element={<OmdbDetails/>}/>
+                            <Route path="/details/:imdbID" element={<SongDetail/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
                         </Routes>
                     </CurrentUser>
