@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import { getSpotifyAccessToken, findAlbumById, findMovieByImdbId, findMovieBySearchTerm} from "./omdb-service";
+import { getSpotifyAccessToken, findSongById, findMovieByImdbId, findMovieBySearchTerm} from "./omdb-service";
 
-export const findAlbumByIdThunk = createAsyncThunk(
+export const findSongByIdThunk = createAsyncThunk(
     'findAlbumById',
-    (params) => findAlbumById(params)
+    (params) => findSongById(params)
 )
 
 export const getSpotifyAccessTokenThunk = createAsyncThunk(
@@ -18,7 +18,7 @@ export const getSpotifyAccessTokenThunk = createAsyncThunk(
 
 
 
-  
+
 
 export const findMovieBySearchTermThunk = createAsyncThunk(
     'findMovieBySearchTerm',

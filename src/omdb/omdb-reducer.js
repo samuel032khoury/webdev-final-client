@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { getSpotifyAccessTokenThunk, findAlbumByIdThunk, findMovieByImdbIdThunk, findMovieBySearchTermThunk} from "./omdb-thunks";
+import { getSpotifyAccessTokenThunk, findSongByIdThunk, findMovieByImdbIdThunk, findMovieBySearchTermThunk} from "./omdb-thunks";
 
 const initialState = {
     token: localStorage.getItem('token') || '',
@@ -19,7 +19,7 @@ const omdbReducer = createSlice({
         [findMovieByImdbIdThunk.fulfilled]: (state, action) => {
             state.details = action.payload
         },
-        [findAlbumByIdThunk.fulfilled]: (state, action) => {
+        [findSongByIdThunk.fulfilled]: (state, action) => {
             state.song = action.payload
         },
         [getSpotifyAccessTokenThunk.fulfilled]: (state, action) => {

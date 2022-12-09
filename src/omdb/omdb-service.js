@@ -32,7 +32,7 @@ export const getSpotifyAccessToken = async () => {
     }
   }
 
-  export const findAlbumById = async (params) => {
+  export const findSongById = async (params) => {
     try {
       const response = await axios.get(`${SEARCH_ENDPOINT}/${params.songID}`, {
         headers: { 

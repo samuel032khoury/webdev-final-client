@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {findAlbumByIdThunk} from "./omdb-thunks";
+import {findSongByIdThunk} from "./omdb-thunks";
 // import {createReviewThunk, findReviewsByMovieThunk} from "../reviews/reviews-thunks";
 
 import {useLocation} from "react-router";
@@ -16,7 +16,7 @@ const OmdbDetails = () => {
     
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(findAlbumByIdThunk({token, songID}))
+        dispatch(findSongByIdThunk({token, songID}))
         
     },[])
     
