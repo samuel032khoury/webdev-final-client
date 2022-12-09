@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import { findSongBySearchTermThunk } from "./spotify-thunks";
+import { Link } from "react-router-dom";
 
 const SpotifySearch = ({ searchCategory }) => {
     const [searchTerm, setSearchTerm] = useState('All I Want For Christmas Is You');
@@ -9,6 +10,7 @@ const SpotifySearch = ({ searchCategory }) => {
     useEffect(() => {
         dispatch(findSongBySearchTermThunk({ token, searchTerm }))
     }, []);
+
     return (
         <>
             <h1>Search for songs</h1>
@@ -36,6 +38,9 @@ const SpotifySearch = ({ searchCategory }) => {
                             <img alt='album art' src={song.album.images[1].url} height={100}/>
                             <p>{song.name}</p>
                             <p>{song.artists.map(artistObject => artistObject.name).join(',')}</p>
+                            <Link to={`/details/${song.id}`}>
+                                Detail
+                            </Link>
                         </li>
                     )
                 }

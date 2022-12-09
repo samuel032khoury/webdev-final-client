@@ -1,65 +1,35 @@
-import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
-import {findMovieByImdbIdThunk} from "./omdb-thunks";
-import {createReviewThunk, findReviewsByMovieThunk} from "../reviews/reviews-thunks";
-import {Link} from "react-router-dom";
+import {useEffect} from "react";
+import {findAlbumByIdThunk} from "./omdb-thunks";
+// import {createReviewThunk, findReviewsByMovieThunk} from "../reviews/reviews-thunks";
+
+import {useLocation} from "react-router";
+
 
 const OmdbDetails = () => {
-    const {imdbID} = useParams()
-    const [review, setReview] = useState('')
-    const {reviews} = useSelector((state) => state.reviews)
-    const {details} = useSelector((state) => state.omdb)
-    const {currentUser} = useSelector((state) => state.users)
+
+    const {pathname} = useLocation()
+    const parts = pathname.split('/')
+    const songID = parts[parts.length - 1]
+
+    const {token, song, loading} = useSelector((state) => state.omdb)
+    
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(findMovieByImdbIdThunk(imdbID))
-        dispatch(findReviewsByMovieThunk(imdbID))
+        dispatch(findAlbumByIdThunk({token, songID}))
+        
     },[])
-    const handlePostReviewBtn = () => {
-        dispatch(createReviewThunk({
-            review,
-            imdbID
-        }))
-    }
+    
+    
     return(
         <>
-            <h1>{details.Title}</h1>
-            <div className="row">
-                <div className="col">
-                    <ul className="list-group">
-                        <li className="list-group-item">Director: {details.Director}</li>
-                        <li className="list-group-item">Released: {details.Released}</li>
-                    </ul>
-                </div>
-                <div className="col">
-                    <img src={details.Poster}/>
-                </div>
-            </div>
-            {
-                currentUser &&
-                <div>
-                    <textarea
-                        onChange={(e) => setReview(e.target.value)}
-                        className="form-control"></textarea>
-                    <button onClick={handlePostReviewBtn}>Post Review</button>
-                </div>
-            }
-            <ul className="list-group">
-                {
-                    reviews.map((review) =>
-                        <li className="list-group-item">
-                            {review.review}
-                            <Link to={`/profile/${review.author._id}`} className="float-end">
-                                {review.author.username}
-                            </Link>
-                        </li>
-                    )
-                }
-            </ul>
-            <pre>
-                {JSON.stringify(details, null, 2)}
-            </pre>
+          { song && 
+          <> 
+          <h1>{song.name}</h1>
+          <img alt='song' src={song.album.images[1].url} height={400}/>
+          <h4>Artist name: {song.artists[0].name} </h4>
+          <h4>Album name: {song.album.name}</h4>
+          </>}
         </>
     )
 }

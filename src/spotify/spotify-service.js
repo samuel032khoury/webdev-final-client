@@ -5,11 +5,13 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 const SEARCH_ENDPOINT = 'https://api.spotify.com/v1/search'
 
+
+
 export const getSpotifyAccessToken = async () => {
   try {
     const tokenUrl = 'https://accounts.spotify.com/api/token';
     const data = qs.stringify({'grant_type':'client_credentials'});
-
+    console.log(CLIENT_ID)
     const response = await axios.post(tokenUrl, data, {
       headers: { 
         'Authorization': `Basic ${CLIENT_ID}:${CLIENT_SECRET}`,
