@@ -1,4 +1,3 @@
-import Movies from "./movies";
 import moviesReducer from "./movies/movies-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
@@ -21,6 +20,7 @@ import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
 import SpotifySearch from "./spotify/spotify-search";
 import SongDetail from "./spotify/song-detail";
+import SpotifyHome from "./spotify/spotify-home";
 
 const store = configureStore({
     reducer: {
@@ -41,7 +41,7 @@ function App() {
                     <CurrentUser>
                         <Navigation/>
                         <Routes>
-                            <Route index element={<Movies/>}/>
+                            <Route index element={<SpotifyHome/>}/>
                             <Route path="/search" element={<SpotifySearch/>}/>
                             <Route path="/users" element={
                                 <ProtectedRoute>

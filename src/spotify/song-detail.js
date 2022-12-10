@@ -1,23 +1,8 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import { findSongByIdThunk } from "./spotify-thunks";
 import { useLocation } from 'react-router-dom'
 
 
 const SongDetail = () => {
-    
-    // const {pathname} = useLocation()
-    // const parts = pathname.split('/')
-    // const songID = parts[parts.length - 1]
-
-    // const {token, song, loading} = useSelector((state) => state.spotify)
-    
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(findSongByIdThunk({token, songID}))
-        
-    // },[])
- 
+  
     const location = useLocation()
     const { song } = location.state
 
