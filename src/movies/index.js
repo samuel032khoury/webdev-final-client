@@ -16,7 +16,7 @@ const Movies = () => {
     return(
         <>
             <h1>Songs</h1>
-            {
+            {/* {
                 currentUser &&
                 <h2>Welcome {currentUser.username} </h2>
             }
@@ -56,7 +56,7 @@ const Movies = () => {
                         </li>
                     )
                 }
-            </ul>
+            </ul> */}
         </>
     )
 }
