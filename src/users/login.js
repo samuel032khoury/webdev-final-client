@@ -5,21 +5,20 @@ import {Navigate, useNavigate} from "react-router";
 
 const Login = () => {
     const {currentUser} = useSelector((state) => state.users)
-    const [username, setUsername] = useState('alice')
-    const [password, setPassword] = useState('alice1234')
-    const [error, setError] = useState(null)
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    //const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleLoginBtn = () => {
         try {
             dispatch(loginThunk({username, password}))
-            navigate('/profile')
-        } catch (e) {
-
+        } catch(e) {
+           // handling errors?
         }
     }
     if (currentUser) {
-        return (<Navigate to={'/profile'}/>)
+        return navigate('/profile')
     }
     return(
         <>
@@ -27,11 +26,11 @@ const Login = () => {
             <input
                 onChange={(e) => setUsername(e.target.value)}
                 className="form-control"
-                placeholder="username"
+                placeholder="Username"
                 value={username}/>
             <input
                 onChange={(e) => setPassword(e.target.value)}
-                className="form-control" placeholder="password" type="password" value={password}/>
+                className="form-control" placeholder="Password" type="password" value={password}/>
             <button
                 className="btn btn-primary w-100"
                 onClick={handleLoginBtn}>Login</button>
