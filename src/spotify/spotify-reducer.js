@@ -1,9 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { findSongByIdThunk, getSpotifyAccessTokenThunk, findSongBySearchTermThunk } from "./spotify-thunks";
+import { findSongsForHomePageThunk, findSongByIdThunk, getSpotifyAccessTokenThunk, findSongBySearchTermThunk } from "./spotify-thunks";
 const initialState = {
   token: localStorage.getItem('token') || '',
   songs: [],
+  // useless right now
   song: [],
+  // songs for home page
+  recommendations: [],
   loading: false,
   details: {}
 };
@@ -20,6 +23,9 @@ const spotifyReducer = createSlice({
     },
     [findSongByIdThunk.fulfilled]: (state, action) => {
       state.song = action.payload
+    },
+    [findSongsForHomePageThunk.fulfilled]: (state, action) => {
+      state.recommendations = action.payload
     },
   }
 });

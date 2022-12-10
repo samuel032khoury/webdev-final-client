@@ -5,6 +5,7 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 const SEARCH_ENDPOINT = 'https://api.spotify.com/v1/search'
 const TRACK_ENDPOINT = 'https://api.spotify.com/v1/tracks'
+const RECOMMENDATIONS_ENDPOINT = 'https://api.spotify.com/v1/recommendations'
 
 
 
@@ -30,6 +31,7 @@ export const getSpotifyAccessToken = async () => {
   }
 }
 
+// Search page API
 export const findSongBySearchTerm = async (params) => {
     try {
       const response = await axios.get(`${SEARCH_ENDPOINT}?q=${params.searchTerm}&type=track`, {
@@ -44,6 +46,7 @@ export const findSongBySearchTerm = async (params) => {
     }
 }
 
+// Find detail of a song (useless right now)
 export const findSongById = async (params) => {
   try {
     const response = await axios.get(`${TRACK_ENDPOINT}/${params.songID}`, {
@@ -56,4 +59,41 @@ export const findSongById = async (params) => {
   } catch(error) {
     console.log(error);
   }
+}
+
+// Find songs for homepage
+export const findSongsForHomePage = async (params) => {
+  try {
+    const q = getRandomSearch()
+    const response = await axios.get(`${SEARCH_ENDPOINT}?q=${q}&type=track`, {
+      headers: { 
+        'Authorization': `Bearer ${params.token}`
+      },
+    })
+
+    return response.data.tracks.items;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+function getRandomSearch() {
+  // A list of all characters that can be chosen.
+  const characters = 'abcdefghijklmnopqrstuvwxyz';
+  
+  // Gets a random character from the characters string.
+  const randomCharacter = characters.charAt(Math.floor(Math.random() * characters.length));
+  let randomSearch = '';
+
+  // Places the wildcard character at the beginning, or both beginning and end, randomly.
+  switch (Math.round(Math.random())) {
+    case 0:
+      randomSearch = randomCharacter + '%';
+      break;
+    case 1:
+      randomSearch = '%' + randomCharacter + '%';
+      break;
+  }
+
+  return encodeURIComponent(randomSearch);
 }
