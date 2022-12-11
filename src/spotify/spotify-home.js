@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import { findSongsForHomePageThunk } from "./spotify-thunks";
+import { findSongsForHomePageThunk, getSpotifyAccessTokenThunk } from "./spotify-thunks";
 import { Link } from 'react-router-dom';
 
 
@@ -9,6 +9,7 @@ const SpotifyHome = () => {
     const {token, recommendations, loading} = useSelector((state) => state.spotify);
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(getSpotifyAccessTokenThunk());
         dispatch(findSongsForHomePageThunk({ token }))
     }, []);
 
