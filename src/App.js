@@ -12,7 +12,7 @@ import usersReducer from "./users/users-reducer";
 import Login from "./users/login";
 import Register from "./users/register";
 import CurrentUser from "./users/current-user";
-import Profile from "./users/profile";
+import Profile from "./users/profile/user-profile/profile";
 import ProtectedRoute from "./users/protected-route";
 import reviewsReducer from "./reviews/reviews-reducer";
 import PublicProfile from "./users/public-profile";
