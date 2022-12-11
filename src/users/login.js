@@ -7,16 +7,10 @@ const Login = () => {
     const {currentUser} = useSelector((state) => state.users)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    //const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleLoginBtn = () => {
-        try {
-            dispatch(loginThunk({username, password}))
-            // navigate('/profile')
-        } catch (e) {
-             // handling errors?
-        }
+        dispatch(loginThunk({username, password}))
     }
     if (currentUser) {
         return navigate('/profile')
@@ -27,11 +21,11 @@ const Login = () => {
             <input
                 onChange={(e) => setUsername(e.target.value)}
                 className="form-control"
-                placeholder="username"
+                placeholder="Username"
                 value={username}/>
             <input
                 onChange={(e) => setPassword(e.target.value)}
-                className="form-control" placeholder="password" type="password" value={password}/>
+                className="form-control" placeholder="password" type="Password" value={password}/>
             <button
                 className="btn btn-primary w-100"
                 onClick={handleLoginBtn}>Login</button>
