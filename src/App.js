@@ -21,6 +21,7 @@ import spotifyReducer from "./spotify/spotify-reducer";
 import SpotifySearch from "./spotify/spotify-search";
 import SongDetail from "./spotify/song-detail";
 import SpotifyHome from "./spotify/spotify-home";
+import AlbumDetail from "./spotify/album-detail";
 
 const store = configureStore({
     reducer: {
@@ -56,6 +57,7 @@ function App() {
                                 </ProtectedRoute>
                             }/>
                             <Route path="/song/:songId" element={<SongDetail/>}/>
+                            <Route path="/album/:albumId" element={<AlbumDetail/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
                         </Routes>
                     </CurrentUser>
