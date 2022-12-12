@@ -12,7 +12,7 @@ const SpotifySearch = ({searchCategory}) => {
   useEffect(() => {
     dispatch(findSongBySearchTermThunk({token, searchTerm}))
   }, []);
-  // Unresolved: Auto submit (without refreshing when change the selection)
+  // Unresolved: Auto submit (without refreshing) after changing the selection
   // To be improved: response from API are not consistent after selection changed
   const listSongs = (result) => {
     return(
