@@ -1,5 +1,11 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import { findSongsForHomePage, findSongById, findSongBySearchTerm, getSpotifyAccessToken } from "./spotify-service";
+import {
+  findSongsForHomePage,
+  findSongById,
+  findSongBySearchTerm,
+  getSpotifyAccessToken,
+  findAlbumBySearchTerm
+} from "./spotify-service";
 
 export const getSpotifyAccessTokenThunk = createAsyncThunk(
   'getSpotifyAccessToken',
@@ -10,6 +16,12 @@ export const findSongBySearchTermThunk = createAsyncThunk(
   'findSongBySearchTerm',
   (params) => {
     return findSongBySearchTerm(params);
+  }
+);
+export const findAlbumBySearchTermThunk = createAsyncThunk(
+  'findAlbumBySearchTermThunk',
+  (params) => {
+    return findAlbumBySearchTerm(params);
   }
 );
 

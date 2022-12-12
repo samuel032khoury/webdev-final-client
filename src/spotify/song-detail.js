@@ -1,12 +1,13 @@
 import { useLocation } from 'react-router-dom'
+import {useState} from "react";
+import {useSelector} from "react-redux";
 
 
 const SongDetail = () => {
     const location = useLocation()
     const { song } = location.state
-    console.log(location);
-    console.log(location.state);
-    console.log(song);
+
+    console.log(song)
     
     return(
         <>

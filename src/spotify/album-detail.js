@@ -1,9 +1,11 @@
 import {useLocation} from 'react-router-dom'
+import {useSelector} from "react-redux";
 
 
 const AlbumDetail = () => {
-  const location = useLocation()
-  const {song} = location.state
+  const song = useSelector(state => {
+    console.log(state);
+    return state.detail})
 
   console.log(song)
 

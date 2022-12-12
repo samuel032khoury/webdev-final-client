@@ -31,7 +31,7 @@ export const getSpotifyAccessToken = async () => {
   }
 }
 
-// Search page API
+// Search page API for track
 export const findSongBySearchTerm = async (params) => {
     try {
       const response = await axios.get(`${SEARCH_ENDPOINT}?q=${params.searchTerm}&type=track`, {
@@ -39,8 +39,22 @@ export const findSongBySearchTerm = async (params) => {
           'Authorization': `Bearer ${params.token}`
         },
       })
-
+      // console.log("LOG:", response.data.tracks.items);
       return response.data.tracks.items;
+    } catch(error) {
+      console.log(error);
+    }
+}
+// Search page API for album
+export const findAlbumBySearchTerm = async (params) => {
+    try {
+      const response = await axios.get(`${SEARCH_ENDPOINT}?q=${params.searchTerm}&type=album`, {
+        headers: {
+          'Authorization': `Bearer ${params.token}`
+        },
+      })
+      // console.log("LOG:", response.data.albums.items);
+      return response.data.albums.items;
     } catch(error) {
       console.log(error);
     }

@@ -25,7 +25,7 @@ import AlbumDetail from "./spotify/album-detail";
 
 const store = configureStore({
     reducer: {
-        movies: moviesReducer,
+        detail: moviesReducer,
         spotify: spotifyReducer,
         likes: likesReducer,
         users: usersReducer,
