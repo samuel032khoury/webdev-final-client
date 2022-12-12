@@ -16,7 +16,7 @@ const BasicInfo = ({user}) => {
     )
 }
 
-const Profile = () => {
+const PrivateUserProfile = () => {
     const navigate = useNavigate()
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
@@ -40,4 +40,4 @@ const Profile = () => {
         </>
     )
 }
-export default Profile
+export default PrivateUserProfile

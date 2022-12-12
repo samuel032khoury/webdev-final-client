@@ -12,10 +12,10 @@ import usersReducer from "./users/users-reducer";
 import Login from "./users/login";
 import Register from "./users/register";
 import CurrentUser from "./users/current-user";
-import Profile from "./users/profile/user-profile/profile";
+import Profile from "./users/profile";
 import ProtectedRoute from "./users/protected-route";
 import reviewsReducer from "./reviews/reviews-reducer";
-import PublicProfile from "./users/public-profile";
+import PublicProfile from "./users/./profile/user-profile/public-user-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
 import SpotifySearch from "./spotify/spotify-search";
@@ -51,9 +51,9 @@ function App() {
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/register" element={<Register/>}/>
                             <Route path="/profile" element={
-                                <ProtectedRoute>
+                                //<ProtectedRoute>
                                     <Profile/>
-                                </ProtectedRoute>
+                                //</ProtectedRoute>
                             }/>
                             <Route path="/details/:imdbID" element={<SongDetail/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
