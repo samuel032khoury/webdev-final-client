@@ -2,7 +2,6 @@ import { useLocation } from 'react-router-dom'
 
 
 const SongDetail = () => {
-  
     const location = useLocation()
     const { song } = location.state
 

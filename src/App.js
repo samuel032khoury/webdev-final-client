@@ -55,7 +55,7 @@ function App() {
                                     <Profile/>
                                 </ProtectedRoute>
                             }/>
-                            <Route path="/details/:imdbID" element={<SongDetail/>}/>
+                            <Route path="/song/:songId" element={<SongDetail/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
                         </Routes>
                     </CurrentUser>

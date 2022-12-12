@@ -26,7 +26,7 @@ const SpotifyHome = () => {
                             <img alt='album art' src={song.album.images[1].url} height={100}/>
                             <p>{song.name}</p>
                             <p>{song.artists.map(artistObject => artistObject.name).join(',')}</p>
-                            <Link to={`/details/${song.id}`} state={{ song: song }}>
+                            <Link to={`/song/${song.id}`} state={{ song: song }}>
                                 Detail
                             </Link>
                 
