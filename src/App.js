@@ -18,10 +18,11 @@ import reviewsReducer from "./reviews/reviews-reducer";
 import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
-import SpotifySearch from "./spotify/spotify-search";
+import SpotifySearchDefault from "./spotify/spotify-search-default";
 import SongDetail from "./reviews/song-detail";
 import SpotifyHome from "./spotify/spotify-home";
 import AlbumDetail from "./spotify/album-detail";
+import SpotifySearchSongs from "./spotify/spotify-search-songs";
 
 const store = configureStore({
     reducer: {
@@ -43,7 +44,8 @@ function App() {
                         <Navigation/>
                         <Routes>
                             <Route index element={<SpotifyHome/>}/>
-                            <Route path="/search" element={<SpotifySearch/>}/>
+                            <Route path="/search" element={<SpotifySearchDefault/>}/>
+                            <Route path="/search/songs" element={<SpotifySearchSongs/>}/>
                             <Route path="/users" element={
                                 <ProtectedRoute>
                                     <Users/>
