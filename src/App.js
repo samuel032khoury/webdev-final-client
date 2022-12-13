@@ -19,7 +19,7 @@ import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
 import SpotifySearch from "./spotify/spotify-search";
-import SongDetail from "./spotify/song-detail";
+import SongDetail from "./reviews/song-detail";
 import SpotifyHome from "./spotify/spotify-home";
 import AlbumDetail from "./spotify/album-detail";
 

@@ -6,8 +6,7 @@ import {
   deleteReviewThunk,
   updateReviewThunk,
   findReviewsBySongThunk,
-} from "../reviews/reviews-thunks";
-
+} from "./reviews-thunks";
 
 const RequestLogin = () => {
   return <h1>Please Login to see all the comments</h1>;
@@ -16,23 +15,22 @@ const RequestLogin = () => {
 const Review = (review) => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.users);
-  const [edited, setEdited] = useState(false)
-  const [currentReview, setCurrentReview] = useState(review.review)
-
+  const [edited, setEdited] = useState(false);
+  const [currentReview, setCurrentReview] = useState(review.review);
 
   const handleReviewBtn = () => {
     const newReview = {
-        _id: review.id,
-        review: currentReview,
-      };
-      
+      _id: review.id,
+      review: currentReview,
+    };
+
     dispatch(
-        updateReviewThunk({
+      updateReviewThunk({
         reviewID: review.id,
-        newReview
+        newReview,
       })
     );
-    setEdited(!edited)
+    setEdited(!edited);
   };
 
   return (
@@ -46,15 +44,13 @@ const Review = (review) => {
                   <div className="float-end">
                     <i
                       onClick={() => {
-                        setEdited(!edited)
+                        setEdited(!edited);
                       }}
                       className="bi bi-pencil px-2"
                     ></i>
                     <i
                       onClick={() => {
-                        dispatch(
-                            deleteReviewThunk({ reviewID: review.id })
-                        );
+                        dispatch(deleteReviewThunk({ reviewID: review.id }));
                       }}
                       className="bi bi-x-lg"
                     ></i>
@@ -63,30 +59,30 @@ const Review = (review) => {
                   <></>
                 )}
                 <b>{review.username}:</b>
-               { !edited &&  <p>{review.review}</p>}
-               { edited && 
-                <form>
-                <div className="form-group">
-                  <textarea
-                    cols="80"
-                    rows="3"
-                    id="review"
-                    className="form-control"
-                    placeholder="Leave your review!"
-                    value={currentReview}
-                    onChange={(e) => setCurrentReview(e.target.value)}
-                  ></textarea>
-    
-                  <button
-                    type="button"
-                    onClick={handleReviewBtn}
-                    className="btn btn-info"
-                  >
-                    Update Review
-                  </button>
-                </div>
-              </form>
-                }
+                {!edited && <p>{review.review}</p>}
+                {edited && (
+                  <form>
+                    <div className="form-group">
+                      <textarea
+                        cols="80"
+                        rows="3"
+                        id="review"
+                        className="form-control"
+                        placeholder="Leave your review!"
+                        value={currentReview}
+                        onChange={(e) => setCurrentReview(e.target.value)}
+                      ></textarea>
+
+                      <button
+                        type="button"
+                        onClick={handleReviewBtn}
+                        className="btn btn-info"
+                      >
+                        Update Review
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             </div>
           </div>
@@ -118,8 +114,6 @@ const SongDetail = () => {
   useEffect(() => {
     dispatch(findReviewsBySongThunk(song.id));
   }, []);
-
-
 
   return (
     <>

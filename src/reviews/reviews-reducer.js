@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-// import { updateReview } from "./reviews-service";
 import {createReviewThunk, deleteReviewThunk, updateReviewThunk, findReviewsByAuthorThunk, findReviewsBySongThunk} from "./reviews-thunks";
 
 const reviewsReducer = createSlice({
@@ -14,16 +13,7 @@ const reviewsReducer = createSlice({
         [findReviewsBySongThunk.fulfilled]: (state, action) => {
             state.reviews = action.payload
         },
-        // [updateReviewThunk.fulfilled]: (state, action) => {
-        //     state.reviews = state.reviews.filter(r => {
-        //         if (r._id === action.payload) {
-        //             console.log(r)
-        //             // r.review = action.payload
-        //         }
-        //     })
-        // },
         [updateReviewThunk.fulfilled]: (state, { payload }) => {
-            
             console.log(payload)
             const reviewIdx = state.reviews.findIndex((r) => r._id === payload._id);
             state.reviews[reviewIdx] = {
@@ -32,8 +22,6 @@ const reviewsReducer = createSlice({
             };
           },
         [deleteReviewThunk.fulfilled]: (state, action) => {
-            // state.reviews = action.payload
-            // console.log(action)
             state.reviews = state.reviews.filter(r => {
                 return r._id !== action.payload
             })

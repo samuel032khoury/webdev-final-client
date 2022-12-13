@@ -3,15 +3,10 @@ import axios from "axios";
 const REVIEW_API = 'http://localhost:4000/api/reviews'
 const SONG_REVIEWS_API = 'http://localhost:4000/api/song'
 const AUTHOR_REVIEWS_API = 'http://localhost:4000/api/users'
-const MOVIE_REVIEWS_API =""
 
 const api = axios.create({withCredentials: true});
 
 export const createReview = async (params) => {
-    // const response = await api.post(REVIEW_API, review)
-    // // console.log(review)
-    // return response.data
-
     try {
         const response = await axios({
           method: "post",
@@ -36,7 +31,6 @@ export const deleteReview = async (params) => {
           url: `${REVIEW_API}/delete/${params.reviewID}`,
           withCredentials: true,
         });
-        // const status = response.data
         return params.reviewID
       } catch (error) {
         return error;
