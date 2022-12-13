@@ -13,7 +13,6 @@ const SpotifySearch = ({searchCategory}) => {
     dispatch(findSongBySearchTermThunk({token, searchTerm}))
   }, []);
   const listSongs = (result) => {
-    console.log(result);
     return(
       <li key={result.id} className="list-group-item">
                             <i onClick={() => {
@@ -29,7 +28,6 @@ const SpotifySearch = ({searchCategory}) => {
     )
   }
   const listAlbums = (result) => {
-    // console.log(result);
     return(
       <li key={result.id} className="list-group-item">
                             <i onClick={() => {
