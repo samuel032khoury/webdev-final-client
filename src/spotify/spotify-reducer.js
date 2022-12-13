@@ -31,7 +31,6 @@ const spotifyReducer = createSlice({
       state.song = action.payload
     },
     [findAlbumBySearchTermThunk.fulfilled]: (state, action) => {
-      console.log(action);
       state.songs = action.payload
     },
     [findSongsForHomePageThunk.fulfilled]: (state, action) => {

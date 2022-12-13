@@ -4,10 +4,8 @@ import {useSelector} from "react-redux";
 
 const AlbumDetail = () => {
   const song = useSelector(state => {
-    console.log(state);
     return state.detail})
 
-  console.log(song)
 
   return (
     <>
