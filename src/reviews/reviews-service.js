@@ -15,7 +15,8 @@ export const createReview = async (params) => {
           data: {
             review: params.review,
             songID: params.songID,
-            username: params.username
+            username: params.username,
+            createAt: params.createAt
           },
         });
         return response.data;
@@ -39,13 +40,13 @@ export const deleteReview = async (params) => {
 
 export const updateReview = async (params) => {
     try {
-        console.log(params)
         const response = await axios({
           method: "post",
           url: `${REVIEW_API}/update/${params.reviewID}`,
           withCredentials: true,
           data:{
-            review: params.newReview.review
+            review: params.newReview.review,
+            createAt: params.newReview.createAt
           }
         });
         const status = response.data
@@ -61,7 +62,7 @@ export const findReviewsBySong = async (songID) => {
     return response.data
 }
 
-export const findReviewsByAuthor = async (author) => {
-    const response = await api.get(`${AUTHOR_REVIEWS_API}/${author}/reviews`)
+export const findReviews = async () => {
+    const response = await api.get(`${REVIEW_API}`)
     return response.data
 }

@@ -2,8 +2,6 @@ import {useParams} from "react-router";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "./users-thunk";
-import {findReviewsByAuthor} from "../reviews/reviews-service";
-import {findReviewsByAuthorThunk} from "../reviews/reviews-thunks";
 import {Link} from "react-router-dom";
 import {findFollowersThunk, findFollowingThunk, followUserThunk} from "../follows/follows-thunks";
 
@@ -20,7 +18,6 @@ const PublicProfile = () => {
     }
     useEffect(() => {
         dispatch(findUserByIdThunk(uid))
-        dispatch(findReviewsByAuthorThunk(uid))
         dispatch(findFollowersThunk(uid))
         dispatch(findFollowingThunk(uid))
     }, [uid])

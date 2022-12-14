@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {findSongBySearchTermThunk} from "./spotify-thunks";
 import {Link, useNavigate} from 'react-router-dom';
+import { createSongsThunk } from "../songs/songs-thunks";
 
 const SpotifySearchSongs = () => {
   const [searchTerm, setSearchTerm] = useState('All I Want For Christmas Is You');
@@ -12,6 +13,20 @@ const SpotifySearchSongs = () => {
     dispatch(findSongBySearchTermThunk({token, searchTerm}))
   }, []);
   const listSongs = (song) => {
+    
+    const currentSong = {
+      id: song.id,
+      name: song.name,
+      image: song.album.images[1].url,
+      duration_ms: song.duration_ms,
+      artist: song.artists[0].name,
+      album: song.album.name,
+      popularity: song.popularity,
+    }
+    const handleSongInfo = () => { 
+      dispatch(createSongsThunk(currentSong))
+    }
+
     return(
       <li key={song.id} className="list-group-item">
         <i onClick={() => {
@@ -20,7 +35,7 @@ const SpotifySearchSongs = () => {
         <img alt='album art' src={song.album.images[1].url} height={100}/>
         <p>{song.name}</p>
         <p>{song.artists.map(artistObject => artistObject.name).join(',')}</p>
-        <Link to={`/song/${song.id}`} state={{song: song}}>
+        <Link to={`/song/${song.id}`} state={{song: currentSong}} onClick={handleSongInfo}>
           Detail
         </Link>
       </li>
