@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const USERS_URL = 'http://localhost:4000/users';
-const FAVORITES_URL = 'http://localhost:4000/users/:uid/favorites/:sid';
+const FAVORITES_URL = 'http://localhost:4000/favorites';
 
 export const userFavoritesSong = async (uid, sid) => {
   const response = await axios.post(`${USERS_URL}/${uid}/favorites/${sid}`);
@@ -18,3 +18,8 @@ export const findSongsFavoritedByUser = async (uid) => {
   const response = await axios.get(`${USERS_URL}/${uid}/favorites`);
   return response.data;
 };
+
+export const findAllFavorites = async () => {
+  const response = await axios.get(FAVORITES_URL);
+  return response.data;
+}

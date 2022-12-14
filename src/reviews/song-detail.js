@@ -7,7 +7,7 @@ import {
   updateReviewThunk,
   findReviewsBySongThunk,
 } from "./reviews-thunks";
-import { userFavoritesSongThunk } from "../favorites/favorites-thunks";
+import { findAllFavoritesThunk, userFavoritesSongThunk, userUnfavoritesSongThunk } from "../favorites/favorites-thunks";
 
 const RequestLogin = () => {
   return <h1>Please Login to see all the comments</h1>;
@@ -100,8 +100,10 @@ const SongDetail = () => {
   const { song } = location.state;
   const { currentUser } = useSelector((state) => state.users);
   const { reviews } = useSelector((state) => state.reviews);
+  const { favorites } = useSelector((state) => state.favorites);
   const [currentReview, setCurrentReview] = useState("");
   const dispatch = useDispatch();
+  const [userFavoritedThisSong, setUserFavoritedThisSong] = useState(favorites.filter(s => s.song === song.id && s.user === currentUser._id).length > 0);
 
   const handleReviewBtn = () => {
     if (currentReview === "") {
@@ -124,10 +126,20 @@ const SongDetail = () => {
       'uid': currentUser._id,
       'sid': song.id,
     }));
+    setUserFavoritedThisSong(true);
+  }
+
+  const handleUnfavoriteSong = () => {
+    dispatch(userUnfavoritesSongThunk({
+      'uid': currentUser._id,
+      'sid': song.id,
+    }));
+    setUserFavoritedThisSong(false);
   }
 
   useEffect(() => {
     dispatch(findReviewsBySongThunk(song.id));
+    dispatch(findAllFavoritesThunk());
   }, []);
 
   const minitues = (song.duration_ms - (song.duration_ms % 60000)) / 60000
@@ -138,9 +150,16 @@ const SongDetail = () => {
         <>
           <h1>SONG</h1>
           <h1>{song.name}</h1>
-          <i onClick={() => {
-            handleFavoriteSong(song.id);
-          }} className="d-block bi bi-star"></i>
+          {currentUser && userFavoritedThisSong &&
+            <i onClick={() => {
+              handleUnfavoriteSong(song.id);
+            }} className="d-block bi bi-star-fill"></i>
+          }
+          {currentUser && !userFavoritedThisSong && 
+            <i onClick={() => {
+              handleFavoriteSong(song.id);
+            }} className="d-block bi bi-star"></i>
+          }
           <img alt="song" src={song.image} height={400} />
           <h4>Popularity: {song.popularity}</h4>
           <h4>Song Duration: {minitues} minutes and {seconds} seconds</h4>

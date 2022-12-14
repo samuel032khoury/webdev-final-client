@@ -5,15 +5,11 @@ import {Link, useNavigate} from 'react-router-dom';
 import { createSongsThunk } from "../songs/songs-thunks";
 
 const SpotifySearchSongs = () => {
-  const [searchTerm, setSearchTerm] = useState('All I Want For Christmas Is You');
+  const [searchTerm, setSearchTerm] = useState('');
   const {token, songs, loading} = useSelector((state) => state.spotify);
   const {currentUser} = useSelector((state) => state.users)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(findSongBySearchTermThunk({token, searchTerm}))
-  }, []);
 
   const listSongs = (song) => {
     
@@ -56,6 +52,7 @@ const SpotifySearchSongs = () => {
           </button>
           <input
             className="form-control w-75"
+            placeholder='All I Want for Christmas Is You'
             onChange={(e) => {
                 setSearchTerm(e.target.value)
             }}

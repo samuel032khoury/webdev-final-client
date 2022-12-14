@@ -4,15 +4,10 @@ import { getSpotifyAccessTokenThunk } from "../spotify/spotify-thunks";
 import { Link } from "react-router-dom";
 import { findReviewsThunk } from "../reviews/reviews-thunks";
 import { findAllSongsThunk } from "./songs-thunks";
-import { findSongsFavoritedByUserThunk } from "../favorites/favorites-thunks";
+import { findAllFavoritesThunk } from "../favorites/favorites-thunks";
 
 const Review = ({ review }) => {
-  const dispatch = useDispatch();
   const { songs } = useSelector((state) => state.songs);
-
-  useEffect(() => {
-    dispatch(findAllSongsThunk());
-  }, []);
 
   function findSong(r) {
     const result = songs.filter((song) => song.id === r.songID);
@@ -27,8 +22,9 @@ const Review = ({ review }) => {
             <div className="d-flex flex-row ">
               <img alt="album art" src={song.image} height={100} />
               <div>
+                <p>Title: {song.name}</p>
                 <p>Artist: {song.artist}</p>
-                <p>Alblum: {song.album}</p>
+                <p>Album: {song.album}</p>
                 <Link to={`/song/${song.id}`} state={{ song: song }}>
                   Detail
                 </Link>
@@ -70,15 +66,16 @@ const SpotifyHome = () => {
   const { token, recommendations, loading } = useSelector(
     (state) => state.spotify
   );
-
   const { reviews } = useSelector((state) => state.reviews);
-  const { userFavorites } = useSelector((state) => state.favorites);
+  const { favorites } = useSelector((state) => state.favorites);
   const myReviews = currentUser && reviews.filter(review => review.author === currentUser._id);
+  const myFavorites = currentUser && favorites.filter(favorite => favorite.user === currentUser._id);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSpotifyAccessTokenThunk());
     dispatch(findReviewsThunk());
-    currentUser && dispatch(findSongsFavoritedByUserThunk(currentUser._id));
+    dispatch(findAllSongsThunk());
+    dispatch(findAllFavoritesThunk());
   }, []);
 
   return (
@@ -90,15 +87,15 @@ const SpotifyHome = () => {
         {reviews &&
           reviews.map((review) => <Review key={review._id} review={review} />)}
       </ul>
-      <h1>Your Reviews</h1>
+      {currentUser && <h2>Your Reviews</h2>}
       <ul className="list-group">
         {myReviews &&
           myReviews.map((review) => <Review key={review._id} review={review} />)}
       </ul>
-      <h1>Your Favorite Songs</h1>
+      {currentUser && <h2>Your Favorite Songs</h2>}
       <ul className="list-group">
-        {userFavorites &&
-          userFavorites.map(favorite => <Song sid={favorite.song} />)
+        {myFavorites &&
+          myFavorites.map(favorite => <Song sid={favorite.song} />)
         }
       </ul>
     </>
