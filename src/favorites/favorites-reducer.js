@@ -16,7 +16,6 @@ export const favoritesReducer = createSlice({
     },
     [userUnfavoritesSongThunk.fulfilled]: (state, action) => {
       state.favorites = state.favorites.filter(f => f.song !== action.meta.sid);
-      console.log('UNFACROTIE FULFILLED:', action);
     },
     [findSongsFavoritedByUserThunk.fulfilled]: (state, action) => {
       state.userFavorites = action.payload;
