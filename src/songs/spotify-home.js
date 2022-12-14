@@ -22,9 +22,8 @@ const Review = ({ review }) => {
             <div className="d-flex flex-row ">
               <img alt="album art" src={song.image} height={100} />
               <div>
-                <p>Title: {song.name}</p>
+                <p>Song: {song.name}</p>
                 <p>Artist: {song.artist}</p>
-                <p>Album: {song.album}</p>
                 <Link to={`/song/${song.id}`} state={{ song: song }}>
                   Detail
                 </Link>
@@ -87,7 +86,8 @@ const SpotifyHome = () => {
         {reviews &&
           reviews.map((review) => <Review key={review._id} review={review} />)}
       </ul>
-      {currentUser && <h2>Your Reviews</h2>}
+     {currentUser && <>
+      <h1>Your Reviews</h1>
       <ul className="list-group">
         {myReviews &&
           myReviews.map((review) => <Review key={review._id} review={review} />)}
@@ -98,6 +98,7 @@ const SpotifyHome = () => {
           myFavorites.map(favorite => <Song sid={favorite.song} />)
         }
       </ul>
+     </>}
     </>
   );
 };
