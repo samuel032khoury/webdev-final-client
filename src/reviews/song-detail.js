@@ -23,13 +23,14 @@ const Review = (review) => {
     const newReview = {
       _id: review.id,
       review: currentReview,
+      createAt: new Date()
     };
-
     dispatch(
       updateReviewThunk({
         reviewID: review.id,
         newReview,
       })
+      
     );
     setEdited(!edited);
   };
@@ -103,14 +104,19 @@ const SongDetail = () => {
   const dispatch = useDispatch();
 
   const handleReviewBtn = () => {
-    dispatch(
-      createReviewThunk({
-        review: currentReview,
-        songID: song.id,
-        username: currentUser.username,
-      })
-    );
-    setCurrentReview("");
+    if (currentReview === "") {
+      alert("Review can't be empty")
+    } else {
+      dispatch(
+        createReviewThunk({
+          review: currentReview,
+          songID: song.id,
+          username: currentUser.username,
+          createAt: new Date()
+        })
+      );
+      setCurrentReview("");
+    }
   };
 
   const handleFavoriteSong = () => {
@@ -124,6 +130,8 @@ const SongDetail = () => {
     dispatch(findReviewsBySongThunk(song.id));
   }, []);
 
+  const minitues = (song.duration_ms - (song.duration_ms % 60000)) / 60000
+  const seconds = Math.ceil(song.duration_ms % 60000 / 1000)
   return (
     <>
       {song && (
@@ -133,9 +141,11 @@ const SongDetail = () => {
           <i onClick={() => {
             handleFavoriteSong(song.id);
           }} className="d-block bi bi-star"></i>
-          <img alt="song" src={song.album.images[0].url} height={400} />
-          <h4>Artist name: {song.artists[0].name} </h4>
-          <h4>Album name: {song.album.name}</h4>
+          <img alt="song" src={song.image} height={400} />
+          <h4>Popularity: {song.popularity}</h4>
+          <h4>Song Duration: {minitues} minutes and {seconds} seconds</h4>
+          <h4>Artist name: {song.artist} </h4>
+          <h4>Album name: {song.album}</h4>
         </>
       )}
 

@@ -1,4 +1,4 @@
-import moviesReducer from "./movies/movies-reducer";
+
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import {likesReducer} from "./likes/likes-reducer";
@@ -15,7 +15,7 @@ import CurrentUser from "./users/current-user";
 import Profile from "./users/profile/user-profile/profile";
 import ProtectedRoute from "./users/protected-route";
 import reviewsReducer from "./reviews/reviews-reducer";
-import PublicProfile from "./users/public-profile";
+import PublicProfile from "./users/profile/user-profile/public-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
 import favoritesReducer from "./favorites/favorites-reducer";
@@ -23,16 +23,20 @@ import SpotifySearchDefault from "./spotify/spotify-search-default";
 import SongDetail from "./reviews/song-detail";
 import SpotifyHome from "./spotify/spotify-home";
 import SpotifySearchSongs from "./spotify/spotify-search-songs";
+import songsReducer from "./songs/songs-reducer";
 
 const store = configureStore({
     reducer: {
-        detail: moviesReducer,
+        songs: songsReducer,
         spotify: spotifyReducer,
         favorites: favoritesReducer,
         users: usersReducer,
         reviews: reviewsReducer,
         follows: followsReducer
-    }
+    }, middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 function App() {
