@@ -20,12 +20,11 @@ const Review = ({ review }) => {
         <>
           <li key={song.id} className="list-group-item">
             <div className="d-flex flex-row ">
-              <img alt="album art" src={song.image} height={100} />
+              <img alt="album art" src={song.image} height={100} className={"me-3 mb-2"}/>
               <div>
-                <p>Song: {song.name}</p>
-                <p>Artist: {song.artist}</p>
-                <Link to={`/song/${song.id}`} state={{ song: song }}>
-                  Detail
+                <p><span style={{"font-size": 24}}><b>{song.name}</b></span> by {song.artist}</p>
+                <Link to={`/song/${~song.id}`} state={{ song: song }}>
+                  Show detail
                 </Link>
               </div>
             </div>
@@ -50,7 +49,7 @@ const Song = ({ sid }) => {
           <p>{matchingSong.name}</p>
           <p>{matchingSong.artist}</p>
           <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
-            Detail
+            Show detail
           </Link>
       </li>
       </>

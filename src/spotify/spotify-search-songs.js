@@ -43,20 +43,22 @@ const SpotifySearchSongs = () => {
       <h1>Search for songs</h1>
       <ul className="list-group">
         <li className="list-group-item">
-          <button
-            className="btn btn-primary float-end"
-            onClick={() => {
-                dispatch(findSongBySearchTermThunk({ token, searchTerm }))
+          <form onSubmit={(e) => e.preventDefault()}>
+            <button
+              className="btn btn-primary float-end"
+              onClick={() => {
+                dispatch(findSongBySearchTermThunk({token, searchTerm}))
                 navigate('/search/songs');
-            }}>Search
-          </button>
-          <input
-            className="form-control w-75"
-            placeholder='All I Want for Christmas Is You'
-            onChange={(e) => {
+              }}>Search
+            </button>
+            <input
+              className="form-control w-75"
+              placeholder='Search for a song...'
+              onChange={(e) => {
                 setSearchTerm(e.target.value)
-            }}
-            value={searchTerm}/>
+              }}
+              value={searchTerm}/>
+          </form>
         </li>
         {
           songs && songs.map(listSongs)

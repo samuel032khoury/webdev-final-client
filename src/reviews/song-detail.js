@@ -103,7 +103,7 @@ const SongDetail = () => {
   const { favorites } = useSelector((state) => state.favorites);
   const [currentReview, setCurrentReview] = useState("");
   const dispatch = useDispatch();
-  const [userFavoritedThisSong, setUserFavoritedThisSong] = useState(favorites.filter(s => s.song === song.id && s.user === currentUser._id).length > 0);
+  const [userFavoritedThisSong, setUserFavoritedThisSong] = useState(currentUser?._id && favorites.filter(s => s.song === song.id && s.user === currentUser._id).length > 0);
 
   const handleReviewBtn = () => {
     if (currentReview === "") {
