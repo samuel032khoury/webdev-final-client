@@ -6,17 +6,17 @@ import {Link, useNavigate} from 'react-router-dom';
 const SpotifySearchSongs = () => {
   const [searchTerm, setSearchTerm] = useState('All I Want For Christmas Is You');
   const {token, songs, loading} = useSelector((state) => state.spotify);
+  const {currentUser} = useSelector((state) => state.users)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(findSongBySearchTermThunk({token, searchTerm}))
   }, []);
+
   const listSongs = (song) => {
     return(
       <li key={song.id} className="list-group-item">
-        <i onClick={() => {
-            console.log('TODO: user favorites this song')
-        }} className="float-end bi bi-star"></i>
         <img alt='album art' src={song.album.images[1].url} height={100}/>
         <p>{song.name}</p>
         <p>{song.artists.map(artistObject => artistObject.name).join(',')}</p>
@@ -25,7 +25,7 @@ const SpotifySearchSongs = () => {
         </Link>
       </li>
     )
-  }
+  };
 
   return (
     <>

@@ -20,9 +20,8 @@ const SpotifyHome = () => {
       <h1>Home Page</h1>
       <h1>Song Reviews</h1>
       {/* TODO: get most recent song reviews */}
-      <h1>Artist Reviews</h1>
-      {/* TODO: get most recent artist reviews */}
       {/* TODO: logged in content (most recent reviews for user) */}
+      {/* TODO: logged in content (user's favorite songs) */}
     </>
   );
 };

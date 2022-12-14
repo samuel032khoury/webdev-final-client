@@ -1,8 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk} from "../../users-thunk";
 import {useNavigate} from "react-router";
+import { useEffect } from "react";
+import { findSongsFavoritedByUserThunk } from "../../../favorites/favorites-thunks";
 
 const BasicInfo = ({user}) => {
+    const {userFavorites} = useSelector((state) => state.favorites);
+    console.log(userFavorites);
     return (
         <>
             <div className="mt-2">
@@ -10,7 +14,10 @@ const BasicInfo = ({user}) => {
                 <h4>First Name: {user.firstName}</h4>
                 <h4>Last Name: {user.lastName}</h4>
                 <h4>Email: {user.email}</h4>
-
+                <h4>Favorite Songs: {user.email}</h4>
+                {
+                    
+                }
             </div>
         </>
     )
@@ -24,6 +31,9 @@ const Profile = () => {
         dispatch(logoutThunk())
         navigate('/login')
     }
+    useEffect(() => {
+        dispatch(findSongsFavoritedByUserThunk(currentUser._id));
+    }, [])
     return(
         <>
             <h1>Profile</h1>

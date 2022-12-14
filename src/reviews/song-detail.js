@@ -7,6 +7,7 @@ import {
   updateReviewThunk,
   findReviewsBySongThunk,
 } from "./reviews-thunks";
+import { userFavoritesSongThunk } from "../favorites/favorites-thunks";
 
 const RequestLogin = () => {
   return <h1>Please Login to see all the comments</h1>;
@@ -100,6 +101,7 @@ const SongDetail = () => {
   const { reviews } = useSelector((state) => state.reviews);
   const [currentReview, setCurrentReview] = useState("");
   const dispatch = useDispatch();
+
   const handleReviewBtn = () => {
     dispatch(
       createReviewThunk({
@@ -111,6 +113,13 @@ const SongDetail = () => {
     setCurrentReview("");
   };
 
+  const handleFavoriteSong = () => {
+    dispatch(userFavoritesSongThunk({
+      'uid': currentUser._id,
+      'sid': song.id,
+    }));
+  }
+
   useEffect(() => {
     dispatch(findReviewsBySongThunk(song.id));
   }, []);
@@ -121,7 +130,10 @@ const SongDetail = () => {
         <>
           <h1>SONG</h1>
           <h1>{song.name}</h1>
-          <img alt="song" src={song.album.images[1].url} height={400} />
+          <i onClick={() => {
+            handleFavoriteSong(song.id);
+          }} className="d-block bi bi-star"></i>
+          <img alt="song" src={song.album.images[0].url} height={400} />
           <h4>Artist name: {song.artists[0].name} </h4>
           <h4>Album name: {song.album.name}</h4>
         </>
