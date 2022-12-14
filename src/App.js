@@ -15,7 +15,7 @@ import CurrentUser from "./users/current-user";
 import Profile from "./users/profile/user-profile/profile";
 import ProtectedRoute from "./users/protected-route";
 import reviewsReducer from "./reviews/reviews-reducer";
-import PublicProfile from "./users/public-profile";
+import PublicProfile from "./users/profile/user-profile/public-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
 import SpotifySearchDefault from "./spotify/spotify-search-default";
