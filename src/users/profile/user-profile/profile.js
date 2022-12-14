@@ -35,7 +35,7 @@ const BasicInfo = ({user}) => {
                 <h4>First Name: {user.firstName}</h4>
                 <h4>Last Name: {user.lastName}</h4>
                 <h4>Email: {user.email}</h4>
-                <h4>Favorite Songs: {user.email}</h4>
+                <h4>Favorite Songs:</h4>
                 <ul className="list-group">
                     {
                         userFavorites.map(favorite => <Song sid={favorite.song} />)
@@ -54,16 +54,25 @@ const Profile = () => {
         dispatch(logoutThunk())
         navigate('/login')
     }
+    const handleEditBtn = () => {
+        navigate('/profile/edit')
+    }
     useEffect(() => {
         dispatch(findSongsFavoritedByUserThunk(currentUser._id));
     }, [])
     return(
         <>
             <h1>Profile</h1>
+            <button
+                className="btn btn-primary float-end"
+                onClick={handleEditBtn}>
+                Edit Profile
+            </button>
             {
                 currentUser &&
                 <h2>Welcome, {currentUser.role} {currentUser.username}!</h2>
             }
+
             <BasicInfo user={currentUser} />
             <button
                 className="btn btn-danger"

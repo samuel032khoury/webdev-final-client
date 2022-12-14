@@ -3,65 +3,35 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "../../users-thunk";
 import {Link} from "react-router-dom";
-import {findFollowersThunk, findFollowingThunk, followUserThunk} from "../../../follows/follows-thunks";
 
 const PublicProfile = () => {
     const {uid} = useParams()
     const {publicProfile} = useSelector((state) => state.users)
     const {reviews} = useSelector((state) => state.reviews)
-    const {followers, following} = useSelector((state) => state.follows)
     const dispatch = useDispatch()
-    const handleFollowBtn = () => {
-        dispatch(followUserThunk({
-            followed: uid
-        }))
-    }
+
     useEffect(() => {
         dispatch(findUserByIdThunk(uid))
-        dispatch(findFollowersThunk(uid))
-        dispatch(findFollowingThunk(uid))
     }, [uid])
     return(
         <>
-            <button
-                onClick={handleFollowBtn}
-                className="btn btn-success float-end">
-                Follow
-            </button>
             <h1>{publicProfile && publicProfile.username}</h1>
+            <h2>Recent Reviews</h2>
             <ul>
                 {
-                    reviews && reviews.map((review) =>
+                    reviews && reviews.filter((review) => (review.author === uid))
+                        .map((review) =>
                     <li>
-                        <Link to={`/details/${review.imdbID}`}>
-                        {review.review} {review.imdbID}
+                        <Link to={`/song/${reviews.songID}`}>
+                        {review.review} {reviews.songID}
                         </Link>
                     </li>
                     )
                 }
             </ul>
-            <h2>Following</h2>
-            <div className="list-group">
-                {
-                    following && following.map((follow) =>
-                        <Link to={`/profile/${follow.followed._id}`} className="list-group-item">
-                            {follow.followed.username}
-                        </Link>
-                    )
-                }
-            </div>
-            <h2>Followers</h2>
-            <div className="list-group">
-                {
-                    followers && followers.map((follow) =>
-                        <Link to={`/profile/${follow.follower._id}`} className="list-group-item">
-                            {follow.follower.username}
-                        </Link>
-                    )
-                }
-            </div>
+            <h2>Favorite Songs</h2>
         </>
     )
 }
 
-export default PublicProfile
+export default PublicProfile;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerThunk } from "./users-thunk";
-import { current } from "@reduxjs/toolkit";
 import { Navigate } from "react-router";
 
 const Register = () => {
