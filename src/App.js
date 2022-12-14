@@ -19,10 +19,9 @@ import PublicProfile from "./users/profile/user-profile/public-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
 import favoritesReducer from "./favorites/favorites-reducer";
-import SpotifySearchDefault from "./spotify/spotify-search-default";
+import SpotifySearch from "./spotify/spotify-search";
 import SongDetail from "./reviews/song-detail";
 import SpotifyHome from "./songs/spotify-home";
-import SpotifySearchSongs from "./spotify/spotify-search-songs";
 import songsReducer from "./songs/songs-reducer";
 
 const store = configureStore({
@@ -48,8 +47,7 @@ function App() {
                         <Navigation/>
                         <Routes>
                             <Route index element={<SpotifyHome/>}/>
-                            <Route path="/search" element={<SpotifySearchDefault/>}/>
-                            <Route path="/search/songs" element={<SpotifySearchSongs/>}/>
+                            <Route path="/search" element={<SpotifySearch/>}/>
                             <Route path="/users" element={
                                 <ProtectedRoute>
                                     <Users/>
@@ -63,7 +61,7 @@ function App() {
                                 </ProtectedRoute>
                             }/>
                             <Route path="/song/:songId" element={<SongDetail/>}/>
-                            <Route path="/profile/:uid" element={<PublicProfile/>}/>
+                            <Route path="/profile/:uid" element={<PublicProfile/>}/> 
                         </Routes>
                     </CurrentUser>
                 </BrowserRouter>

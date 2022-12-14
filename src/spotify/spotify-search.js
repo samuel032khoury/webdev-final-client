@@ -1,19 +1,20 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {useState, useEffect} from "react";
 import {findSongBySearchTermThunk} from "./spotify-thunks";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { createSongsThunk } from "../songs/songs-thunks";
 
-const SpotifySearchSongs = () => {
+
+const SpotifySearchDefault = () => {
   const [searchTerm, setSearchTerm] = useState('All I Want For Christmas Is You');
   const {token, songs, loading} = useSelector((state) => state.spotify);
-  const {currentUser} = useSelector((state) => state.users)
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     dispatch(findSongBySearchTermThunk({token, searchTerm}))
   }, []);
+
 
   const listSongs = (song) => {
     
@@ -51,7 +52,6 @@ const SpotifySearchSongs = () => {
             className="btn btn-primary float-end"
             onClick={() => {
                 dispatch(findSongBySearchTermThunk({ token, searchTerm }))
-                navigate('/search/songs');
             }}>Search
           </button>
           <input
@@ -69,4 +69,4 @@ const SpotifySearchSongs = () => {
   );
 };
 
-export default SpotifySearchSongs;
+export default SpotifySearchDefault;
