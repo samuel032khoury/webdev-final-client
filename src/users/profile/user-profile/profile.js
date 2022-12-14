@@ -4,6 +4,7 @@ import {useNavigate} from "react-router";
 import { useEffect } from "react";
 import { findSongsFavoritedByUserThunk } from "../../../favorites/favorites-thunks";
 import { Link } from "react-router-dom";
+import { findAllSongsThunk } from "../../../songs/songs-thunks";
 
 const Song = ({ sid }) => {
     const { songs } = useSelector((state) => state.songs);
@@ -38,7 +39,7 @@ const BasicInfo = ({user}) => {
                 <h4>Favorite Songs: {user.email}</h4>
                 <ul className="list-group">
                     {
-                        userFavorites.map(favorite => <Song sid={favorite.song} />)
+                        userFavorites.map(favorite => <Song key={favorite.song} sid={favorite.song} />)
                     }
                 </ul>
             </div>
@@ -56,6 +57,7 @@ const Profile = () => {
     }
     useEffect(() => {
         dispatch(findSongsFavoritedByUserThunk(currentUser._id));
+        dispatch(findAllSongsThunk());
     }, [])
     return(
         <>
