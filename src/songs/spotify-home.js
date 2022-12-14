@@ -4,6 +4,7 @@ import { getSpotifyAccessTokenThunk } from "../spotify/spotify-thunks";
 import { Link } from "react-router-dom";
 import { findReviewsThunk } from "../reviews/reviews-thunks";
 import { findAllSongsThunk } from "./songs-thunks";
+import { findSongsFavoritedByUserThunk } from "../favorites/favorites-thunks";
 
 const Review = ({ review }) => {
   const dispatch = useDispatch();
@@ -43,6 +44,27 @@ const Review = ({ review }) => {
   );
 };
 
+const Song = ({ sid }) => {
+  const { songs } = useSelector((state) => state.songs);
+  const matchingSong = songs.filter(song => song.id === sid)[0];
+  if (matchingSong) {
+    return (
+      <>
+        <li key={matchingSong.id} className="list-group-item">
+          <img alt='album art' src={matchingSong.image} height={100}/>
+          <p>{matchingSong.name}</p>
+          <p>{matchingSong.artist}</p>
+          <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
+            Detail
+          </Link>
+      </li>
+      </>
+    );
+  } else {
+    return <></>;
+  }
+}
+
 const SpotifyHome = () => {
   const { currentUser } = useSelector((state) => state.users);
   const { token, recommendations, loading } = useSelector(
@@ -50,10 +72,13 @@ const SpotifyHome = () => {
   );
 
   const { reviews } = useSelector((state) => state.reviews);
+  const { userFavorites } = useSelector((state) => state.favorites);
+  const myReviews = currentUser && reviews.filter(review => review.author === currentUser._id);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSpotifyAccessTokenThunk());
     dispatch(findReviewsThunk());
+    currentUser && dispatch(findSongsFavoritedByUserThunk(currentUser._id));
   }, []);
 
   return (
@@ -64,6 +89,17 @@ const SpotifyHome = () => {
       <ul className="list-group">
         {reviews &&
           reviews.map((review) => <Review key={review._id} review={review} />)}
+      </ul>
+      <h1>Your Reviews</h1>
+      <ul className="list-group">
+        {myReviews &&
+          myReviews.map((review) => <Review key={review._id} review={review} />)}
+      </ul>
+      <h1>Your Favorite Songs</h1>
+      <ul className="list-group">
+        {userFavorites &&
+          userFavorites.map(favorite => <Song sid={favorite.song} />)
+        }
       </ul>
     </>
   );

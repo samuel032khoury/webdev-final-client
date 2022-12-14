@@ -18,10 +18,10 @@ import reviewsReducer from "./reviews/reviews-reducer";
 import PublicProfile from "./users/profile/user-profile/public-profile";
 import followsReducer from "./follows/follows-reducer";
 import spotifyReducer from "./spotify/spotify-reducer";
+import favoritesReducer from "./favorites/favorites-reducer";
 import SpotifySearchDefault from "./spotify/spotify-search-default";
 import SongDetail from "./reviews/song-detail";
 import SpotifyHome from "./songs/spotify-home";
-import AlbumDetail from "./spotify/album-detail";
 import SpotifySearchSongs from "./spotify/spotify-search-songs";
 import songsReducer from "./songs/songs-reducer";
 
@@ -29,7 +29,7 @@ const store = configureStore({
     reducer: {
         songs: songsReducer,
         spotify: spotifyReducer,
-        likes: likesReducer,
+        favorites: favoritesReducer,
         users: usersReducer,
         reviews: reviewsReducer,
         follows: followsReducer
@@ -63,7 +63,6 @@ function App() {
                                 </ProtectedRoute>
                             }/>
                             <Route path="/song/:songId" element={<SongDetail/>}/>
-                            <Route path="/album/:albumId" element={<AlbumDetail/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
                         </Routes>
                     </CurrentUser>

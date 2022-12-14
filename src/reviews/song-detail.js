@@ -7,6 +7,7 @@ import {
   updateReviewThunk,
   findReviewsBySongThunk,
 } from "./reviews-thunks";
+import { userFavoritesSongThunk } from "../favorites/favorites-thunks";
 
 const RequestLogin = () => {
   return <h1>Please Login to see all the comments</h1>;
@@ -101,6 +102,7 @@ const SongDetail = () => {
   const { reviews } = useSelector((state) => state.reviews);
   const [currentReview, setCurrentReview] = useState("");
   const dispatch = useDispatch();
+
   const handleReviewBtn = () => {
     if (currentReview === "") {
       alert("Review can't be empty")
@@ -117,6 +119,13 @@ const SongDetail = () => {
     }
   };
 
+  const handleFavoriteSong = () => {
+    dispatch(userFavoritesSongThunk({
+      'uid': currentUser._id,
+      'sid': song.id,
+    }));
+  }
+
   useEffect(() => {
     dispatch(findReviewsBySongThunk(song.id));
   }, []);
@@ -129,6 +138,9 @@ const SongDetail = () => {
         <>
           <h1>SONG</h1>
           <h1>{song.name}</h1>
+          <i onClick={() => {
+            handleFavoriteSong(song.id);
+          }} className="d-block bi bi-star"></i>
           <img alt="song" src={song.image} height={400} />
           <h4>Popularity: {song.popularity}</h4>
           <h4>Song Duration: {minitues} minutes and {seconds} seconds</h4>
