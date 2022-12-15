@@ -8,6 +8,7 @@ import {
   findReviewsBySongThunk,
 } from "./reviews-thunks";
 import { findAllFavoritesThunk, userFavoritesSongThunk, userUnfavoritesSongThunk } from "../favorites/favorites-thunks";
+import {findSongByIDThunk} from "../songs/songs-thunks";
 
 const RequestLogin = () => {
   return <h1>Please Login to see all the comments</h1>;
@@ -97,12 +98,15 @@ const Review = (review) => {
 
 const SongDetail = () => {
   const location = useLocation();
-  const { song } = location.state;
+  // const { song } = location.state;
+  const songID = location.pathname.split('/').at(-1);
+  const {token, loading} = useSelector((state) => state.spotify);
   const { currentUser } = useSelector((state) => state.users);
   const { reviews } = useSelector((state) => state.reviews);
   const { favorites } = useSelector((state) => state.favorites);
   const [currentReview, setCurrentReview] = useState("");
   const dispatch = useDispatch();
+  const song = dispatch(findSongByIDThunk({ token, songID }))
   const [userFavoritedThisSong, setUserFavoritedThisSong] = useState(currentUser?._id && favorites.filter(s => s.song === song.id && s.user === currentUser._id).length > 0);
 
   const handleReviewBtn = () => {

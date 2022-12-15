@@ -12,7 +12,7 @@ const SpotifySearchSongs = () => {
   const navigate = useNavigate();
 
   const listSongs = (song) => {
-    
+
     const currentSong = {
       id: song.id,
       name: song.name,
@@ -30,7 +30,7 @@ const SpotifySearchSongs = () => {
       <li key={song.id} className="list-group-item">
         <img alt='album art' src={song.album.images[1].url} height={100}/>
         <p className={'mt-2'}><span style={{"font-size": 21}}><b>{song.name}</b></span> by {song.artists.map(artistObject => artistObject.name).join(',')}</p>
-        <Link to={`/song/${~song.id}`} state={{song: song}}>
+        <Link to={`/song/${song.id}`} state={{song: song}}>
           Show detail
         </Link>
       </li>
