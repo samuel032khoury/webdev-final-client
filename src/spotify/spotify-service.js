@@ -31,6 +31,9 @@ export const getSpotifyAccessToken = async () => {
 // Search page API for track
 export const findSongBySearchTerm = async (params) => {
     try {
+      if (params?.searchTerm === "") {
+        return
+      }
       const response = await axios.get(`${SEARCH_ENDPOINT}?q=${params.searchTerm}&type=track`, {
         headers: { 
           'Authorization': `Bearer ${params.token}`

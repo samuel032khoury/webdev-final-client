@@ -29,10 +29,9 @@ const SpotifySearchSongs = () => {
     return(
       <li key={song.id} className="list-group-item">
         <img alt='album art' src={song.album.images[1].url} height={100}/>
-        <p>{song.name}</p>
-        <p>{song.artists.map(artistObject => artistObject.name).join(',')}</p>
-        <Link to={`/song/${song.id}`} state={{song: currentSong}} onClick={handleSongInfo}>
-          Detail
+        <p className={'mt-2'}><span style={{"font-size": 21}}><b>{song.name}</b></span> by {song.artists.map(artistObject => artistObject.name).join(',')}</p>
+        <Link to={`/song/${~song.id}`} state={{song: song}}>
+          Show detail
         </Link>
       </li>
     )
