@@ -51,7 +51,7 @@ const Register = () => {
 
   return (
     <>
-      <h1>Register</h1>
+      <h1 className={"mt-3"}>Register</h1>
       {error && <div className="alert alert-danger">{error}</div>}
       <input
         onChange={(e) => setUsername(e.target.value)}

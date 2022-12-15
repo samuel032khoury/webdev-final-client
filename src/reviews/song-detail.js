@@ -160,22 +160,30 @@ const SongDetail = () => {
     <>
       {song && (
         <>
-          <h1>{song.name}</h1>
-          {currentUser && userFavoritedThisSong &&
-            <i onClick={() => {
-              handleUnfavoriteSong(song.id);
-            }} className="d-block bi bi-star-fill"></i>
-          }
-          {currentUser && !userFavoritedThisSong && 
-            <i onClick={() => {
-              handleFavoriteSong(song.id);
-            }} className="d-block bi bi-star"></i>
-          }
-          <img alt="song" src={song.image} height={400} />
-          <h4>Artist: {song.artist} </h4>
-          <h4>Album: {song.album}</h4>
-          <h4>Track Popularity: {song.popularity}%</h4>
-          <h4>Song Duration: {minitues} min, {seconds} sec</h4>
+          <div className={"row mt-3"}>
+            <div className={'col-4'}>
+              <img alt="song" src={song.image} height={400}/>
+            </div>
+            <div className={'col-8'}>
+              <h3 className={'pb-0 text-success'}>
+                Track - {song.name} By {song.artist} {" "}
+                {currentUser && userFavoritedThisSong &&
+                  <i onClick={() => {
+                    handleUnfavoriteSong(song.id);
+                  }} className="d-inline bi bi-star-fill text-warning"></i>
+                }
+                {currentUser && !userFavoritedThisSong &&
+                  <i onClick={() => {
+                    handleFavoriteSong(song.id);
+                  }} className="d-inline bi bi-star text-warning"></i>
+                }
+              </h3>
+              <h3 className={'text-secondary'}>From album {song.album}</h3>
+              <h4>Track Popularity: {song.popularity}%</h4>
+              <h4>Track Length: {minitues} min, {seconds} sec</h4>
+            </div>
+          </div>
+
         </>
       )}
       <hr/>

@@ -17,7 +17,7 @@ const Login = () => {
     }
     return(
         <>
-            <h1>Login</h1>
+            <h1 className={"mt-3"}>Login</h1>
           <form onSubmit={e => e.preventDefault()}>
             <input
               onChange={(e) => setUsername(e.target.value)}

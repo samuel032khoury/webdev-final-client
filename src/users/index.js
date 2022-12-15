@@ -12,7 +12,7 @@ const Users = () => {
     }, [])
     return(
         <>
-            <h1>Users</h1>
+            <h1 className={"mt-3"}>Users</h1>
             <ul className="list-group">
                 {
                     users.map((user) =>

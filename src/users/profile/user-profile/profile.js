@@ -67,7 +67,7 @@ const Profile = () => {
         <>
             {
                 currentUser &&
-              <h2>Welcome, {currentUser.role.toString().toLowerCase()} {currentUser.username}!</h2>
+              <h1 className={"mt-3"}>Welcome, {currentUser.role.toString().toLowerCase()} {currentUser.username}!</h1>
             }
             <BasicInfo user={currentUser} />
             <button

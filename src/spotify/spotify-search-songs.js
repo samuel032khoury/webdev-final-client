@@ -22,10 +22,6 @@ const SpotifySearchSongs = () => {
       album: song.album.name,
       popularity: song.popularity,
     }
-    // dispatch(createSongsThunk(currentSong))
-    // const handleSongInfo = () => {
-    //   dispatch(createSongsThunk(currentSong))
-    // }
 
     return(
       <li key={song.id} className="list-group-item">
@@ -40,7 +36,7 @@ const SpotifySearchSongs = () => {
 
   return (
     <>
-      <h1>Search for songs</h1>
+      <h1 className={"mt-3"}>Search for songs</h1>
       <ul className="list-group">
         <li className="list-group-item">
           <form onSubmit={(e) => e.preventDefault()}>
