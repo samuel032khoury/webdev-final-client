@@ -59,6 +59,9 @@ const Profile = () => {
         dispatch(logoutThunk())
         navigate('/login')
     }
+    const handleEditBtn = () => {
+        navigate('/profile/edit')
+    }
     useEffect(() => {
         dispatch(findSongsFavoritedByUserThunk(currentUser._id));
         dispatch(findAllSongsThunk());
@@ -70,6 +73,11 @@ const Profile = () => {
               <h1 className={"mt-3"}>Welcome, {currentUser.role.toString().toLowerCase()} {currentUser.username}!</h1>
             }
             <BasicInfo user={currentUser} />
+            <button
+                className="btn btn-primary mt-3 me-3"
+                onClick={handleEditBtn}>
+                Edit
+            </button>
             <button
                 className="btn btn-danger mt-3"
                 onClick={handleLogoutBtn}>

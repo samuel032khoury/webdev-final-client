@@ -23,6 +23,7 @@ import SongDetail from "./reviews/song-detail";
 import SpotifyHome from "./songs/spotify-home";
 import SpotifySearchSongs from "./spotify/spotify-search-songs";
 import songsReducer from "./songs/songs-reducer";
+import EditProfile from "./users/profile/edit-profile";
 
 const store = configureStore({
     reducer: {
@@ -63,6 +64,7 @@ function App() {
                             }/>
                             <Route path="/song/:songId" element={<SongDetail/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
+                            <Route path="/profile/edit" element={<EditProfile/>}/>
                         </Routes>
                     </CurrentUser>
                 </BrowserRouter>
