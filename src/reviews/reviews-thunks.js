@@ -1,6 +1,13 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
-import {createReview, deleteReview, updateReview, findReviewsBySong, findReviews} from "./reviews-service";
+import {
+  createReview,
+  deleteReview,
+  updateReview,
+  findReviewsBySong,
+  findLatestReviews,
+  findAllReviews
+} from "./reviews-service";
 
 export const createReviewThunk = createAsyncThunk(
     'createReview',
@@ -22,8 +29,12 @@ export const updateReviewThunk = createAsyncThunk(
     async (params) => updateReview(params)
 )
 
-export const findReviewsThunk = createAsyncThunk(
-    "findReviewsThunk",
-    async () => findReviews()
+export const findLatestReviewsThunk = createAsyncThunk(
+    "findLatestReviewsThunk",
+    async () => findLatestReviews()
+)
+export const findAllReviewsThunk = createAsyncThunk(
+    "findAllReviewsThunk",
+    async () => findAllReviews()
 )
 

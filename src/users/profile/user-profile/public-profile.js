@@ -4,41 +4,48 @@ import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "../../users-thunk";
 import {Link} from "react-router-dom";
 import {findFollowersThunk, findFollowingThunk, followUserThunk} from "../../../follows/follows-thunks";
+import {findAllReviewsThunk, findLatestReviewsThunk} from "../../../reviews/reviews-thunks";
 
 const PublicProfile = () => {
     const {uid} = useParams()
-    const {publicProfile} = useSelector((state) => state.users)
-    const {reviews} = useSelector((state) => state.reviews)
-    const {followers, following} = useSelector((state) => state.follows)
-    const dispatch = useDispatch()
-    const handleFollowBtn = () => {
-        dispatch(followUserThunk({
-            followed: uid
-        }))
-    }
-    useEffect(() => {
-        dispatch(findUserByIdThunk(uid))
-        dispatch(findFollowersThunk(uid))
-        dispatch(findFollowingThunk(uid))
-    }, [uid])
-    return(
-        <>
-            <button
-                onClick={handleFollowBtn}
-                className="btn btn-success float-end">
-                Follow
-            </button>
-            <h1>{publicProfile && publicProfile.username}</h1>
-            <ul>
-                {
-                    reviews && reviews.map((review) =>
-                    <li>
-                        <Link to={`/details/${review.imdbID}`}>
-                        {review.review} {review.imdbID}
-                        </Link>
-                    </li>
-                    )
-                }
+  const {publicProfile} = useSelector((state) => state.users)
+  const {reviews} = useSelector((state) => state.reviews)
+  const {songs} = useSelector((state) => state.songs)
+  const {followers, following} = useSelector((state) => state.follows)
+  const dispatch = useDispatch()
+  const handleFollowBtn = () => {
+    dispatch(followUserThunk({
+      followed: uid
+    }))
+  }
+  const findSongInStateById = (id) => {
+    return songs.find((song) => song.id === id)
+  }
+  useEffect(() => {
+    dispatch(findUserByIdThunk(uid))
+    dispatch(findFollowersThunk(uid))
+    dispatch(findFollowingThunk(uid))
+    dispatch(findAllReviewsThunk())
+  }, [uid])
+  return (
+    <>
+      <button
+        onClick={handleFollowBtn}
+        className="btn btn-success float-end">
+        Follow
+      </button>
+      <h1>{publicProfile && publicProfile.username}</h1>
+      <ul>
+        {
+
+          reviews && reviews.filter((r) => r.username === publicProfile?.username).map((review) =>
+            <li>
+              <Link to={`/song/${review.songID}`} state={{song: findSongInStateById(review.songID)}}>
+                {review.review}
+              </Link>
+            </li>
+          )
+        }
             </ul>
             <h2>Following</h2>
             <div className="list-group">

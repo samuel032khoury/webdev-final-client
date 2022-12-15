@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getSpotifyAccessTokenThunk } from "../spotify/spotify-thunks";
 import { Link } from "react-router-dom";
-import { findReviewsThunk } from "../reviews/reviews-thunks";
+import { findLatestReviewsThunk } from "../reviews/reviews-thunks";
 import { findAllSongsThunk } from "./songs-thunks";
 import {findAllFavoritesThunk} from "../favorites/favorites-thunks";
 import {findAllUsersThunk} from "../users/users-thunk";
@@ -83,7 +83,7 @@ const SpotifyHome = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSpotifyAccessTokenThunk());
-    dispatch(findReviewsThunk());
+    dispatch(findLatestReviewsThunk());
     dispatch(findAllSongsThunk());
     dispatch(findAllFavoritesThunk());
     dispatch(findAllUsersThunk())
