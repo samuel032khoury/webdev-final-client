@@ -61,7 +61,7 @@ function App() {
                                     <Profile/>
                                 </ProtectedRoute>
                             }/>
-                            <Route path="/song/:songId" element={<SongDetail/>}/>
+                            <Route path="/details/:songId" element={<SongDetail/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
                         </Routes>
                     </CurrentUser>

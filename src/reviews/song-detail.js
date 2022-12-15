@@ -20,6 +20,9 @@ const Review = (review) => {
   const [edited, setEdited] = useState(false);
   const [currentReview, setCurrentReview] = useState(review.review);
 
+  console.log('REVIEW', review);
+  console.log('currentReview', currentReview);
+
   const handleReviewBtn = () => {
     const newReview = {
       _id: review.id,
@@ -61,7 +64,9 @@ const Review = (review) => {
                 ) : (
                   <></>
                 )}
-                <b>{review.username}:</b>
+                <Link to={`/profile/${review.userID}`}>
+                  {review.username}
+                </Link>
                 {!edited && <p>{review.review}</p>}
                 {edited && (
                   <form>
@@ -201,6 +206,7 @@ const SongDetail = () => {
                   review={review.review}
                   username={review.username}
                   id={review._id}
+                  userID={review.author}
                 />
               ))}
           </ul>

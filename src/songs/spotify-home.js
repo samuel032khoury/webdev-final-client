@@ -29,7 +29,7 @@ const Review = ({ review, self_posted=false }) => {
               <img alt="album art" src={song.image} height={100} className={"me-3 mb-2"}/>
               <div>
                 <p><span style={{"font-size": 24}}><b>{song.name}</b></span> by {song.artist}</p>
-                <Link to={`/song/${song.id}`} state={{song: song}}>
+                <Link to={`/details/${song.id}`} state={{song: song}}>
                   Show detail
                 </Link>
               </div>
@@ -58,7 +58,7 @@ const Song = ({ sid }) => {
               <img alt="album art" src={matchingSong.image} height={100} className={"me-3 mb-2"}/>
               <div>
                 <p><span style={{"font-size": 24}}><b>{matchingSong.name}</b></span> by {matchingSong.artist}</p>
-                <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
+                <Link to={`/details/${matchingSong.id}`} state={{song: matchingSong}}>
                   Show detail
                 </Link>
               </div>
