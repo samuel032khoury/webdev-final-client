@@ -11,7 +11,7 @@ import {findAllFavoritesThunk, userFavoritesSongThunk, userUnfavoritesSongThunk}
 import {createSongsThunk} from "../songs/songs-thunks";
 
 const RequestLogin = () => {
-  return <h1>Please Login to see all the comments</h1>;
+  return <h1>Login to see all the comments</h1>;
 };
 
 const Review = (review) => {
@@ -160,7 +160,6 @@ const SongDetail = () => {
     <>
       {song && (
         <>
-          <h1>SONG</h1>
           <h1>{song.name}</h1>
           {currentUser && userFavoritedThisSong &&
             <i onClick={() => {
@@ -173,10 +172,10 @@ const SongDetail = () => {
             }} className="d-block bi bi-star"></i>
           }
           <img alt="song" src={song.image} height={400} />
-          <h4>Popularity: {song.popularity}</h4>
-          <h4>Song Duration: {minitues} minutes and {seconds} seconds</h4>
-          <h4>Artist name: {song.artist} </h4>
-          <h4>Album name: {song.album}</h4>
+          <h4>Artist: {song.artist} </h4>
+          <h4>Album: {song.album}</h4>
+          <h4>Track Popularity: {song.popularity}%</h4>
+          <h4>Song Duration: {minitues} min, {seconds} sec</h4>
         </>
       )}
 

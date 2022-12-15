@@ -35,7 +35,10 @@ const Review = ({ review, self_posted=false }) => {
               </div>
             </div>
             <h4>
-              <span style={{"font-size": 18}}>{self_posted? "You" : "User "}{!self_posted && (<a className={'text-decoration-none'} href={`/profile/${findUIdByName(review.username)}`}>{review.username}</a>)} left a comment to this song earlier <b>"{review.review}"</b></span>
+              <span style={{"font-size": 18}}>{self_posted? "You" : "User "}{!self_posted &&
+                (<a className={'text-decoration-none'} href={`/profile/${findUIdByName(review.username)}`}>{review.username}</a>)
+              } left a comment to this song earlier <b>"{review.review.length > 20 ?
+                  review.review.substring(0,20) + '...' : review.review}"</b></span>
             </h4>
           </li>
         </>
