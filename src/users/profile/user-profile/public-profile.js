@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "../../users-thunk";
 import {Link} from "react-router-dom";
 import {findAllReviewsThunk, findLatestReviewsThunk} from "../../../reviews/reviews-thunks";
+import {findAllSongs} from "../../../songs/songs-service";
+import {findAllSongsThunk} from "../../../songs/songs-thunks";
 
 const PublicProfile = () => {
     const {uid} = useParams()
@@ -18,8 +20,10 @@ const PublicProfile = () => {
   useEffect(() => {
     dispatch(findUserByIdThunk(uid))
     dispatch(findAllReviewsThunk())
+    dispatch(findAllSongsThunk())
   }, [uid])
   const userReviews = reviews.filter((r) => r.username === publicProfile?.username);
+  console.log(publicProfile);
   return (
     <>
       <h1>{publicProfile && `You are looking at ${publicProfile.username}'s profile`}</h1>
@@ -34,8 +38,8 @@ const PublicProfile = () => {
               const song = findSongInStateById(review.songID)
                return <li className={'list-group-item'}>
                   <Link to={`/details/${review.songID}`} state={{song: findSongInStateById(review.songID)}}>
-                    {song.name}
-                  </Link> By {song.artist}
+                    {song?.name}
+                  </Link> By {song?.artist}
                  <div><b>{review.review}</b></div>
                 </li>
               }

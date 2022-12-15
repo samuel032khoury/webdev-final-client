@@ -162,10 +162,10 @@ const SongDetail = () => {
       {song && (
         <>
           <div className={"row mt-3"}>
-            <div className={'col-4'}>
-              <img alt="song" src={song.image} height={400}/>
+            <div className={'col-4 d-block'}>
+              <img alt="song" src={song.image} className={'img-fluid'}/>
             </div>
-            <div className={'col-8'}>
+            <div className={'col-8 d-block'}>
               <h3 className={'pb-0 text-success'}>
                 Track - {song.name} By {song.artist} {" "}
                 {currentUser && userFavoritedThisSong &&

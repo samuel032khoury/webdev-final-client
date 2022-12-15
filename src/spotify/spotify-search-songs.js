@@ -39,7 +39,7 @@ const SpotifySearchSongs = () => {
       <h1 className={"mt-3"}>Search for songs</h1>
       <ul className="list-group">
         <li className="list-group-item">
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form  onSubmit={(e) => e.preventDefault()}>
             <button
               className="btn btn-primary float-end"
               onClick={() => {
