@@ -4,15 +4,21 @@ import { getSpotifyAccessTokenThunk } from "../spotify/spotify-thunks";
 import { Link } from "react-router-dom";
 import { findReviewsThunk } from "../reviews/reviews-thunks";
 import { findAllSongsThunk } from "./songs-thunks";
-import { findAllFavoritesThunk } from "../favorites/favorites-thunks";
+import {findAllFavoritesThunk} from "../favorites/favorites-thunks";
+import {findAllUsersThunk} from "../users/users-thunk";
 
 const Review = ({ review, self_posted=false }) => {
-  const { songs } = useSelector((state) => state.songs);
-  console.log(songs);
+  const {users, loading} = useSelector((state) => state.users)
+  const {songs} = useSelector((state) => state.songs);
   function findSong(r) {
     const result = songs.filter((song) => song.id === r.songID);
     return result[0];
   }
+
+  function findUIdByName(name) {
+    return users.find(user => user.username === name)?._id;
+  }
+
   const song = findSong(review);
   return (
     <>
@@ -23,13 +29,13 @@ const Review = ({ review, self_posted=false }) => {
               <img alt="album art" src={song.image} height={100} className={"me-3 mb-2"}/>
               <div>
                 <p><span style={{"font-size": 24}}><b>{song.name}</b></span> by {song.artist}</p>
-                <Link to={`/song/${song.id}`} state={{ song: song }}>
+                <Link to={`/song/${song.id}`} state={{song: song}}>
                   Show detail
                 </Link>
               </div>
             </div>
             <h4>
-              <span style={{"font-size": 18}}>{self_posted? "You" : "User "}{!self_posted && (<a className={'text-decoration-none'} href={`/profile/${review.username}`}>{review.username}</a>)} left a comment to this song earlier <b>"{review.review}"</b></span>
+              <span style={{"font-size": 18}}>{self_posted? "You" : "User "}{!self_posted && (<a className={'text-decoration-none'} href={`/profile/${findUIdByName(review.username)}`}>{review.username}</a>)} left a comment to this song earlier <b>"{review.review}"</b></span>
             </h4>
           </li>
         </>
@@ -77,6 +83,7 @@ const SpotifyHome = () => {
     dispatch(findReviewsThunk());
     dispatch(findAllSongsThunk());
     dispatch(findAllFavoritesThunk());
+    dispatch(findAllUsersThunk())
   }, []);
 
   return (
