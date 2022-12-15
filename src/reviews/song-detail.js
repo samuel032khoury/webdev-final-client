@@ -20,9 +20,6 @@ const Review = (review) => {
   const [edited, setEdited] = useState(false);
   const [currentReview, setCurrentReview] = useState(review.review);
 
-  console.log('REVIEW', review);
-  console.log('currentReview', currentReview);
-
   const handleReviewBtn = () => {
     const newReview = {
       _id: review.id,
