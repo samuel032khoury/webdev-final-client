@@ -62,7 +62,14 @@ export const findReviewsBySong = async (songID) => {
     return response.data
 }
 
-export const findReviews = async () => {
-    const response = await api.get(`${REVIEW_API}`)
-    return response.data
+export const findLatestReviews = async () => {
+  const response = await api.get(`${REVIEW_API}`)
+  return response.data.slice(0, 10)
 }
+
+export const findAllReviews = async () => {
+  const response = await api.get(`${REVIEW_API}`)
+  return response.data
+}
+
+

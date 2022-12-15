@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 
 const Users = () => {
     const {users, loading} = useSelector((state) => state.users)
-    console.log(users);
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findAllUsersThunk())

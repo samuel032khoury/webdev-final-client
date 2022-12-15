@@ -120,7 +120,6 @@ const SongDetail = () => {
           createAt: new Date()
         })
       );
-      console.log(song);
       const currentSong = {
         id: song.id,
         name: song.name,
