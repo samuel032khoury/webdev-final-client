@@ -6,7 +6,7 @@ import { findReviewsThunk } from "../reviews/reviews-thunks";
 import { findAllSongsThunk } from "./songs-thunks";
 import { findAllFavoritesThunk } from "../favorites/favorites-thunks";
 
-const Review = ({ review }) => {
+const Review = ({ review, self_posted=false }) => {
   const { songs } = useSelector((state) => state.songs);
 
   function findSong(r) {
@@ -29,7 +29,7 @@ const Review = ({ review }) => {
               </div>
             </div>
             <h4>
-              <span style={{"font-size": 18}}>User <a className={'text-decoration-none'} href={`/profile/${review.username}`}>{review.username}</a> left a comment to this song earlier <b>"{review.review}"</b></span>
+              <span style={{"font-size": 18}}>{self_posted? "You" : "User "}{!self_posted && (<a className={'text-decoration-none'} href={`/profile/${review.username}`}>{review.username}</a>)} left a comment to this song earlier <b>"{review.review}"</b></span>
             </h4>
           </li>
         </>
@@ -39,25 +39,28 @@ const Review = ({ review }) => {
 };
 
 const Song = ({ sid }) => {
-  const { songs } = useSelector((state) => state.songs);
-  const matchingSong = songs.filter(song => song.id === sid)[0];
-  if (matchingSong) {
-    return (
-      <>
-        <li key={matchingSong.id} className="list-group-item">
-          <img alt='album art' src={matchingSong.image} height={100}/>
-          <p>{matchingSong.name}</p>
-          <p>{matchingSong.artist}</p>
-          <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
-            Show detail
-          </Link>
-      </li>
-      </>
-    );
-  } else {
-    return <></>;
+    const { songs } = useSelector((state) => state.songs);
+    const matchingSong = songs.filter(song => song.id === sid)[0];
+    if (matchingSong) {
+      return (
+        <>
+          <li key={matchingSong.id} className="list-group-item">
+            <div className="d-flex flex-row ">
+              <img alt="album art" src={matchingSong.image} height={100} className={"me-3 mb-2"}/>
+              <div>
+                <p><span style={{"font-size": 24}}><b>{matchingSong.name}</b></span> by {matchingSong.artist}</p>
+                <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
+                  Show detail
+                </Link>
+              </div>
+            </div>
+          </li>
+        </>
+      )
+    } else {
+      return <></>
+    }
   }
-}
 
 const SpotifyHome = () => {
   const { currentUser } = useSelector((state) => state.users);
@@ -78,19 +81,19 @@ const SpotifyHome = () => {
 
   return (
     <>
-      <h1 className={"mt-3 mb-3"}>Welcome to our music review forum{currentUser && <span>, {currentUser.firstName} </span>}</h1>
-      <h3>Explore with some recent comments</h3>
+      <h1 className={"mt-3"}>Welcome to our music review forum{currentUser && <span>, {currentUser.firstName} </span>}</h1>
+      <h3 className={"mt-3"}>Explore with some recent comments</h3>
       <ul className="list-group">
         {reviews &&
           reviews.map((review) => <Review key={review._id} review={review} />)}
       </ul>
      {currentUser && <>
-      <h1>Your Reviews</h1>
+      <h3 className={"mt-3"}>Your Reviews</h3>
       <ul className="list-group">
         {myReviews &&
-          myReviews.map((review) => <Review key={review._id} review={review} />)}
+          myReviews.map((review) => <Review key={review._id} review={review} self_posted={true}/>)}
       </ul>
-      {currentUser && <h2>Your Favorite Songs</h2>}
+      {currentUser && <h3 className={"mt-3"}>Your Favorite Songs</h3>}
       <ul className="list-group">
         {myFavorites &&
           myFavorites.map(favorite => <Song sid={favorite.song} />)

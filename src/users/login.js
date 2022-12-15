@@ -18,17 +18,20 @@ const Login = () => {
     return(
         <>
             <h1>Login</h1>
+          <form onSubmit={e => e.preventDefault()}>
             <input
-                onChange={(e) => setUsername(e.target.value)}
-                className="form-control"
-                placeholder="Username"
-                value={username}/>
+              onChange={(e) => setUsername(e.target.value)}
+              className="form-control"
+              placeholder="Username"
+              value={username}/>
             <input
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-control" placeholder="Password" type="password" value={password}/>
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control" placeholder="Password" type="password" value={password}/>
             <button
-                className="btn btn-primary w-100"
-                onClick={handleLoginBtn}>Login</button>
+              className="btn btn-primary w-100"
+              onClick={handleLoginBtn}>Login
+            </button>
+          </form>
         </>
     )
 }

@@ -13,13 +13,16 @@ const Song = ({ sid }) => {
       return (
         <>
           <li key={matchingSong.id} className="list-group-item">
-            <img alt='album art' src={matchingSong.image} height={100}/>
-            <p>{matchingSong.name}</p>
-            <p>{matchingSong.artist}</p>
-            <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
-              Detail
-            </Link>
-        </li>
+            <div className="d-flex flex-row ">
+              <img alt="album art" src={matchingSong.image} height={100} className={"me-3 mb-2"}/>
+              <div>
+                <p><span style={{"font-size": 24}}><b>{matchingSong.name}</b></span> by {matchingSong.artist}</p>
+                <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
+                  Show detail
+                </Link>
+              </div>
+            </div>
+          </li>
         </>
       )
     } else {
@@ -36,8 +39,9 @@ const BasicInfo = ({user}) => {
                 <h4>First Name: {user.firstName}</h4>
                 <h4>Last Name: {user.lastName}</h4>
                 <h4>Email: {user.email}</h4>
-                <h4>Favorite Songs: {user.email}</h4>
+
                 <ul className="list-group">
+                  <li className={'list-group-item'}><h4>Favorite Songs</h4></li>
                     {
                         userFavorites.map(favorite => <Song key={favorite.song} sid={favorite.song} />)
                     }
@@ -61,14 +65,13 @@ const Profile = () => {
     }, [])
     return(
         <>
-            <h1>Profile</h1>
             {
                 currentUser &&
-                <h2>Welcome, {currentUser.role} {currentUser.username}!</h2>
+              <h2>Welcome, {currentUser.role.toString().toLowerCase()} {currentUser.username}!</h2>
             }
             <BasicInfo user={currentUser} />
             <button
-                className="btn btn-danger"
+                className="btn btn-danger mt-3"
                 onClick={handleLogoutBtn}>
                 Logout
             </button>
