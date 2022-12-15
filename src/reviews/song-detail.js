@@ -193,7 +193,7 @@ const SongDetail = () => {
         <>
           <h1 className="mt-10">Reviews</h1>
           <ul className="list-group mt-2">
-            {reviews.length === 0 && <h3>There isn't any review for this track yet!</h3>}
+            {reviews.length === 0 && <h3 className={'bg-secondary text-center text-white p-4'}>There isn't any review for this track yet!</h3>}
             {reviews &&
               reviews.map((review) => (
                 <Review
