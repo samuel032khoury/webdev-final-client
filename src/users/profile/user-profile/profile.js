@@ -17,7 +17,7 @@ const Song = ({ sid }) => {
               <img alt="album art" src={matchingSong.image} height={100} className={"me-3 mb-2"}/>
               <div>
                 <p><span style={{"font-size": 24}}><b>{matchingSong.name}</b></span> by {matchingSong.artist}</p>
-                <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
+                <Link to={`/details/${matchingSong.id}`} state={{song: matchingSong}}>
                   Show detail
                 </Link>
               </div>

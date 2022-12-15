@@ -61,7 +61,9 @@ const Review = (review) => {
                 ) : (
                   <></>
                 )}
-                <b>{review.username}:</b>
+                <Link to={`/profile/${review.userID}`}>
+                  {review.username}
+                </Link>
                 {!edited && <p>{review.review}</p>}
                 {edited && (
                   <form>
@@ -200,6 +202,7 @@ const SongDetail = () => {
                   review={review.review}
                   username={review.username}
                   id={review._id}
+                  userID={review.author}
                 />
               ))}
           </ul>

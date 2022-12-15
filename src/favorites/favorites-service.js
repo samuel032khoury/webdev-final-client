@@ -5,7 +5,6 @@ const FAVORITES_URL = 'http://localhost:4000/favorites';
 
 export const userFavoritesSong = async (uid, sid) => {
   const response = await axios.post(`${USERS_URL}/${uid}/favorites/${sid}`);
-  console.log('favorite song response:')
   return response.data;
 };
 
