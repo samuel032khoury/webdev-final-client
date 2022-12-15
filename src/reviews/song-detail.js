@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +11,7 @@ import {findAllFavoritesThunk, userFavoritesSongThunk, userUnfavoritesSongThunk}
 import {createSongsThunk} from "../songs/songs-thunks";
 
 const RequestLogin = () => {
-  return <h1>Login to see all the comments</h1>;
+  return <h1><Link className={'text-decoration-none'} to={'/login'}>Login </Link> to see all the comments</h1>;
 };
 
 const Review = (review) => {
@@ -178,35 +178,14 @@ const SongDetail = () => {
           <h4>Song Duration: {minitues} min, {seconds} sec</h4>
         </>
       )}
-
+      <hr/>
       {!currentUser ? (
         <RequestLogin />
       ) : (
         <>
           <h1 className="mt-10">Reviews</h1>
-          <form>
-            <div className="form-group">
-              <label htmlFor="review">Add your reviews!</label>
-              <textarea
-                cols="80"
-                rows="3"
-                id="review"
-                className="form-control"
-                placeholder="Leave your review!"
-                value={currentReview}
-                onChange={(e) => setCurrentReview(e.target.value)}
-              ></textarea>
-
-              <button
-                type="button"
-                onClick={handleReviewBtn}
-                className="btn btn-primary"
-              >
-                Add Review
-              </button>
-            </div>
-          </form>
-          <ul className="list-group mt-5">
+          <ul className="list-group mt-2">
+            {reviews.length === 0 && <h3>There isn't any review for this track yet!</h3>}
             {reviews &&
               reviews.map((review) => (
                 <Review
@@ -217,6 +196,28 @@ const SongDetail = () => {
                 />
               ))}
           </ul>
+          <form>
+            <div className="form-group">
+              <h4><label htmlFor="review">{reviews.length === 0 ? "Add the first review!" : "Add your review!"}</label></h4>
+              <textarea
+                cols="30"
+                rows="3"
+                id="review"
+                className="form-control"
+                placeholder="Leave some thoughts on this track!"
+                value={currentReview}
+                onChange={(e) => setCurrentReview(e.target.value)}
+              ></textarea>
+
+              <button
+                type="button"
+                onClick={handleReviewBtn}
+                className="btn btn-primary btn-lg mt-2"
+              >
+                Add Review
+              </button>
+            </div>
+          </form>
         </>
       )}
     </>

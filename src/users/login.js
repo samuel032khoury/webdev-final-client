@@ -21,12 +21,12 @@ const Login = () => {
           <form onSubmit={e => e.preventDefault()}>
             <input
               onChange={(e) => setUsername(e.target.value)}
-              className="form-control"
+              className="form-control mb-1"
               placeholder="Username"
               value={username}/>
             <input
               onChange={(e) => setPassword(e.target.value)}
-              className="form-control" placeholder="Password" type="password" value={password}/>
+              className="form-control mb-1" placeholder="Password" type="password" value={password}/>
             <button
               className="btn btn-primary w-100"
               onClick={handleLoginBtn}>Login
