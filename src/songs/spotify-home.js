@@ -45,12 +45,15 @@ const Song = ({ sid }) => {
     return (
       <>
         <li key={matchingSong.id} className="list-group-item">
-          <img alt='album art' src={matchingSong.image} height={100}/>
-          <p>{matchingSong.name}</p>
-          <p>{matchingSong.artist}</p>
+          <div className="d-flex flex-row ">
+          <img alt='album art' src={matchingSong.image} height={100} className={"me-3 mb-2 mt-2"}/>
+            <div>
+            <p><span style={{"font-size": 24}}><b>{matchingSong.name}</b></span> by {matchingSong.artist}</p>
           <Link to={`/song/${matchingSong.id}`} state={{song: matchingSong}}>
             Show detail
           </Link>
+              </div>
+          </div>
       </li>
       </>
     );

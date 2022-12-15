@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "./users-thunk";
-import {Navigate, useNavigate} from "react-router";
+import {useNavigate} from "react-router";
 
 const Login = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -20,12 +20,12 @@ const Login = () => {
             <h1>Login</h1>
             <input
                 onChange={(e) => setUsername(e.target.value)}
-                className="form-control"
+                className="form-control mb-1"
                 placeholder="Username"
                 value={username}/>
             <input
                 onChange={(e) => setPassword(e.target.value)}
-                className="form-control" placeholder="Password" type="password" value={password}/>
+                className="form-control mb-1" placeholder="Password" type="password" value={password}/>
             <button
                 className="btn btn-primary w-100"
                 onClick={handleLoginBtn}>Login</button>
