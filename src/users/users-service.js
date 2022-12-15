@@ -52,5 +52,9 @@ export const createUser = async () => {
 
 }
 
+export const updateUser = async (uid, user) => {
+    const response = await api.put(`${BASE_API_URL}/users/${uid}`, user)
+    return response.data
+}
+
 const deleteUser = async (uid) => {}
-const updateUser = async (uid, username) => {}
