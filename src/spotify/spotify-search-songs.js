@@ -22,9 +22,10 @@ const SpotifySearchSongs = () => {
       album: song.album.name,
       popularity: song.popularity,
     }
-    const handleSongInfo = () => { 
-      dispatch(createSongsThunk(currentSong))
-    }
+    // dispatch(createSongsThunk(currentSong))
+    // const handleSongInfo = () => {
+    //   dispatch(createSongsThunk(currentSong))
+    // }
 
     return(
       <li key={song.id} className="list-group-item">

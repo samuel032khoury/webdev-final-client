@@ -7,7 +7,8 @@ import {
   updateReviewThunk,
   findReviewsBySongThunk,
 } from "./reviews-thunks";
-import { findAllFavoritesThunk, userFavoritesSongThunk, userUnfavoritesSongThunk } from "../favorites/favorites-thunks";
+import {findAllFavoritesThunk, userFavoritesSongThunk, userUnfavoritesSongThunk} from "../favorites/favorites-thunks";
+import {createSongsThunk} from "../songs/songs-thunks";
 
 const RequestLogin = () => {
   return <h1>Please Login to see all the comments</h1>;
@@ -117,6 +118,17 @@ const SongDetail = () => {
           createAt: new Date()
         })
       );
+      console.log(song);
+      const currentSong = {
+        id: song.id,
+        name: song.name,
+        image: song.image,
+        duration_ms: song.duration_ms,
+        artist: song.artist,
+        album: song.album,
+        popularity: song.popularity,
+      }
+      dispatch(createSongsThunk(currentSong))
       setCurrentReview("");
     }
   };

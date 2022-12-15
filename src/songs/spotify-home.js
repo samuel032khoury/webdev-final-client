@@ -8,7 +8,7 @@ import { findAllFavoritesThunk } from "../favorites/favorites-thunks";
 
 const Review = ({ review, self_posted=false }) => {
   const { songs } = useSelector((state) => state.songs);
-
+  console.log(songs);
   function findSong(r) {
     const result = songs.filter((song) => song.id === r.songID);
     return result[0];
