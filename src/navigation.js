@@ -45,6 +45,12 @@ const Navigation = () => {
                     Profile
                 </Link>
             </li>
+          <li className={`nav-item ${currentUser?.role === "ADMIN" ? '':'d-none'}`}>
+                <Link to="/admin"
+                      className={`nav-link ${parts[1] === 'admin'?'active': ''}`}>
+                    Admin
+                </Link>
+            </li>
         </ul>
     )
 }

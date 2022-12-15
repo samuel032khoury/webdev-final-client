@@ -29,7 +29,7 @@ const Review = ({ review }) => {
               </div>
             </div>
             <h4>
-              {review.username}: {review.review}
+              <span style={{"font-size": 18}}>User <a className={'text-decoration-none'} href={`/profile/${review.username}`}>{review.username}</a> left a comment to this song earlier <b>"{review.review}"</b></span>
             </h4>
           </li>
         </>
@@ -78,9 +78,8 @@ const SpotifyHome = () => {
 
   return (
     <>
-      <h1>Home Page</h1>
-      {currentUser && <h2>Welcome {currentUser.username} </h2>}
-      <h1>Song Reviews</h1>
+      <h1 className={"mt-3 mb-3"}>Welcome to our music review forum{currentUser && <span>, {currentUser.firstName} </span>}</h1>
+      <h3>Explore with some recent comments</h3>
       <ul className="list-group">
         {reviews &&
           reviews.map((review) => <Review key={review._id} review={review} />)}
