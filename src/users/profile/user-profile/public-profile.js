@@ -26,7 +26,7 @@ const PublicProfile = () => {
                 {
                 reviews && reviews.filter((r) => r.username === publicProfile?.username).map((review) =>
                     <li>
-                    <Link to={`/song/${review.songID}`} state={{song: findSongInStateById(review.songID)}}>
+                    <Link to={`/details/${review.songID}`} state={{song: findSongInStateById(review.songID)}}>
                         {review.review}
                     </Link>
                     </li>
