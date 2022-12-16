@@ -36,10 +36,10 @@ const EditProfile = () => {
             setError("Username should be between 2 and 20 characters");
             return;
         }
-        if (password.length < 2 || password.length > 20) {
-            setError("Password should be between 2 and 20 characters");
-            return;
-        }
+        // if (password.length < 2 || password.length > 20) {
+        //     setError("Password should be between 2 and 20 characters");
+        //     return;
+        // }
         setError(null);
         const updatedUser = {
             username: username,
@@ -48,7 +48,7 @@ const EditProfile = () => {
             email: email,
             role: currentUser.role
         }
-        dispatch(updateThunk(updatedUser))
+        dispatch(updateThunk(currentUser._id, updatedUser))
         navigate("/profile", {state: {currentUser: updatedUser}})
     }
     const handleCancelBtn = () => {
@@ -67,13 +67,13 @@ const EditProfile = () => {
                    placeholder="Last name" value={lastName} />
             <Field onChange={(e) => setEmail(e.target.value)}
                    placeholder="Email" value={email} />
-            <input
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-control mb-1"
-                placeholder="Password (required)"
-                type="password"
-                value={password}
-            />
+            {/*<input*/}
+            {/*    onChange={(e) => setPassword(e.target.value)}*/}
+            {/*    className="form-control mb-1"*/}
+            {/*    placeholder="Password (required)"*/}
+            {/*    type="password"*/}
+            {/*    value={password}*/}
+            {/*/>*/}
             <div className="row">
                 <div className="col">
                     <button className="btn btn-success w-50 float-end" onClick={handleSaveBtn}>
