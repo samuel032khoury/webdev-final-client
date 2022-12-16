@@ -23,7 +23,6 @@ const PublicProfile = () => {
     dispatch(findAllSongsThunk())
   }, [uid])
   const userReviews = reviews.filter((r) => r.username === publicProfile?.username);
-  console.log(publicProfile);
   return (
     <>
       <h1>{publicProfile && `You are looking at ${publicProfile.username}'s profile`}</h1>
