@@ -119,7 +119,7 @@ const Profile = () => {
                 onChange={(e) => setOldPass(e.target.value)}
                 value={oldPass}
               /></h4> :<></>}
-            {editing ? <h4><label htmlFor={"newpassInput"}>Old Password: </label>
+            {editing ? <h4><label htmlFor={"newpassInput"}>New Password: </label>
               <input
                 className={'ms-2'}
                 id={'newpassInput'}
@@ -128,7 +128,7 @@ const Profile = () => {
                 onChange={(e) => setNewPass(e.target.value)}
                 value={newPass}
               /></h4> :<></>}
-            {editing ? <h4><label htmlFor={"confirmPassInput"}>Old Password: </label>
+            {editing ? <h4><label htmlFor={"confirmPassInput"}>Confirm Password: </label>
               <input
                 className={'ms-2'}
                 id={'confirmPassInput'}
